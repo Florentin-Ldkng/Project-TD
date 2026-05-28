@@ -22,20 +22,9 @@ public class BaseTower : MonoBehaviour
         TowerDetection.OnDetection += ShootingStart;
     }
 
-    void Start()
+    private void OnDisable()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        
+        TowerDetection.OnDetection -= ShootingStart;
     }
 
      void ShootingStart()

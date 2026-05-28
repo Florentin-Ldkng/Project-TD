@@ -6,8 +6,7 @@ public class TowerDetection : MonoBehaviour
     public List<EnemyClass> enemyList;
     EnemyClass Target = null;
 
-    public delegate void Detection();
-    public static event Detection OnDetection;
+    public event System.Action OnDetection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +34,7 @@ public class TowerDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             var temp = new EnemyClass(other.gameObject, SpawnLine());
 
@@ -47,14 +46,13 @@ public class TowerDetection : MonoBehaviour
             
             enemyList.Add(temp);
 
-            if (OnDetection != null)
-                OnDetection();
+            OnDetection?.Invoke();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             var temp = enemyList.Find(x => x.enemy == other.gameObject);
             Destroy(temp.line.gameObject);
