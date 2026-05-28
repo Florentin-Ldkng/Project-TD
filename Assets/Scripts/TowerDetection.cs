@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class TowerDetection : MonoBehaviour
 {
     public List<EnemyClass> enemyList;
     EnemyClass Target = null;
+
+    public delegate void Detection();
+    public static event Detection OnDetection;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +22,10 @@ public class TowerDetection : MonoBehaviour
         {
             foreach (EnemyClass enemy in enemyList)
             {
+                if (enemy.line == null)
+                {
+                    enemy.line = SpawnLine();
+                }
                 enemy.line.SetPosition(0, this.gameObject.transform.position);
                 enemy.line.SetPosition(1, enemy.enemy.transform.position);
             }
@@ -40,6 +46,9 @@ public class TowerDetection : MonoBehaviour
             }
             
             enemyList.Add(temp);
+
+            if (OnDetection != null)
+                OnDetection();
         }
     }
 
