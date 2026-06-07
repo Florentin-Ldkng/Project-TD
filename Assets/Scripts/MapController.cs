@@ -19,8 +19,11 @@ public class MapController : MonoBehaviour
     public Vector2Int endPoint;
 
     public List<Vector2Int> wayPoints;
+    private  List<Vector2Int> tempPath = new List<Vector2Int>();
+    public List<GameObject> path;
 
-
+    List<Location> openList = new List<Location>();
+    List<Location> closedList = new List<Location>();
 
     void Start()
     {        
@@ -40,6 +43,8 @@ public class MapController : MonoBehaviour
 
     private void GenerateMap()
     {
+        tempPath.Clear();
+
         if (tileSet != null)
         {
             CleanupMap();
@@ -65,9 +70,20 @@ public class MapController : MonoBehaviour
                         usedPrefab = placablePrefab; break;
                 }
 
-                tileSet[i, j] = Instantiate(usedPrefab, new Vector3(j * -5, 0, i * -5),Quaternion.identity,this.transform);
+                tileSet[i, j] = Instantiate(usedPrefab, new Vector3(j * -5, 0, i * -5),Quaternion.identity,this.transform);               
+                
             }
         }
+
+        int counter = 0;
+        foreach (var item in tempPath)
+        {
+            counter++;
+            path.Add(tileSet[item.y, item.x]);
+            tileSet[item.y, item.x].name += counter.ToString();
+        }
+
+        tempPath.Clear();
     }
 
     private void CleanupMap()
@@ -83,6 +99,7 @@ public class MapController : MonoBehaviour
         tileSet = null;
         tileGeneration = null;
         wayPoints = null;
+        path.Clear();
     }
 
     private void GenerateTileset()
@@ -94,21 +111,34 @@ public class MapController : MonoBehaviour
         startPoint = new Vector2Int(UnityEngine.Random.Range(0, mapSize), 0);
         endPoint = new Vector2Int((mapSize - 1) - startPoint.x , (mapSize - 1) - startPoint.y);
 
-        //for (int i = 0; i < Mathf.RoundToInt(mapSize / 5); i++)
-        //{
-        //    tempPoint = new Vector2Int(UnityEngine.Random.Range(0, mapSize), UnityEngine.Random.Range(0, mapSize));
-        //
-        //    if (!wayPoints.Contains(tempPoint))
-        //    {
-        //        wayPoints.Add(tempPoint);
-        //        tileGeneration[tempPoint.x, tempPoint.y] = true;
-        //    }
-        //}
+        for (int i = 0; i < Mathf.RoundToInt(mapSize / 5); i++)
+        {
+            tempPoint = new Vector2Int(UnityEngine.Random.Range(0, mapSize), UnityEngine.Random.Range(0, mapSize));
+        
+            if (!wayPoints.Contains(tempPoint))
+            {
+                wayPoints.Add(tempPoint);
+                tileGeneration[tempPoint.x, tempPoint.y] = true;
+            }
+        }
 
         tileGeneration[startPoint.x, startPoint.y] = true;
         tileGeneration[endPoint.x, endPoint.y] = true;
 
-        FindPath(startPoint, endPoint);
+        
+        Vector2Int lastPoint = startPoint;
+
+        if (wayPoints.Count > 0)
+        {
+            foreach (var item in wayPoints)
+            {
+                FindPath(lastPoint, item);
+                lastPoint = item;
+            }
+        }
+        FindPath(lastPoint, endPoint);
+        openList.Clear();
+        closedList.Clear();
     }
 
     private void FindPath(Vector2Int startPoint, Vector2Int endPoint)
@@ -116,9 +146,6 @@ public class MapController : MonoBehaviour
         Location current = null;
         var start = new Location { Position = startPoint };
         var end = new Location { Position = endPoint };
-        var openList = new List<Location>();
-        var closedList = new List<Location>();
-        int g = 0;
 
         start.G = 0;
         start.H = ComputeHScore(start.Position.x, start.Position.y,endPoint.x,endPoint.y);
@@ -140,17 +167,30 @@ public class MapController : MonoBehaviour
                     {
                         j = 0;
                     }
-                    tempVector = new Vector2Int(startPoint.x + (i), startPoint.y + (j));
+                    tempVector = new Vector2Int(current.Position.x + (i), current.Position.y + (j));
+
                     if (tempVector.x >= 0 && tempVector.y >= 0 && tempVector.x < mapSize && tempVector.y < mapSize)
                     {
-                        openList.Add(TileDetection(tempVector, current));
-                        //tileGeneration[tempVector.x, tempVector.y] = true;
+                        if (closedList.FirstOrDefault(x => x.Position == tempVector) == null && openList.FirstOrDefault(x => x.Position == tempVector) == null)
+                        {
+                            openList.Add(TileDetection(tempVector, current));
+                        }               
+                        
                     }
                     
                 }
             }
 
-            break;
+            current = openList.OrderBy(x => x.F).First();
+
+            openList.Remove(current);
+            closedList.Add(current);
+
+            if (current.Position == end.Position)
+            {
+                RenderPath(closedList);
+                break;
+            }
         }
     }
     private int ComputeHScore(int x, int y, int targetX, int targetY)
@@ -166,8 +206,35 @@ public class MapController : MonoBehaviour
         tempLocation.G = current.G + 1;
         tempLocation.H = ComputeHScore(tempLocation.Position.x, tempLocation.Position.y, endPoint.x, endPoint.y);
         tempLocation.F = tempLocation.G + tempLocation.H;
+        tempLocation.Parent = current;
 
         return tempLocation;
+    }
+
+    private void RenderPath(List<Location> closed)
+    {        
+
+        var current = closed.LastOrDefault();
+
+        tempPath.Add(current.Position);
+
+        do
+        {
+            current = current.Parent;
+
+            tempPath.Add(current.Position);
+
+
+            //if (current.Position == startPoint)
+            //{
+            //    break;
+            //}
+            
+            tileGeneration[current.Position.x, current.Position.y] = true;
+            
+            
+        } while (current != null && current.Parent != null && current.Position != startPoint);
+        
     }
 
 }

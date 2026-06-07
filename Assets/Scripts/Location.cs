@@ -7,4 +7,5 @@ public class Location
     public int G;
     public int H;
     public Location Parent;
+
 }
