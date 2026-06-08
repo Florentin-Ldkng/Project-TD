@@ -20,7 +20,8 @@ public class EnemyController : MonoBehaviour
         {
             spawn1 = false;
 
-            Instantiate(enemy,mapController.path.First().transform.position,Quaternion.identity,this.transform);
+            var spawn = Instantiate(enemy,mapController.path.First().transform.position + (Vector3.up * 1.5f),Quaternion.identity,this.transform);
+            spawn.GetComponent<EnemyTestScript>().Path = mapController.path;
         }
     }
 

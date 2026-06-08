@@ -81,7 +81,7 @@ public class MapController : MonoBehaviour
         {
             counter++;
             path.Add(tileSet[item.Position.y, item.Position.x]);
-            tileSet[item.Position.y, item.Position.x].name += counter.ToString();
+            //tileSet[item.Position.y, item.Position.x].name += counter.ToString();
         }
 
         tempPath.Clear();
