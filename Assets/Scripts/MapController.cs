@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapController : MonoBehaviour
@@ -19,11 +20,9 @@ public class MapController : MonoBehaviour
     public Vector2Int endPoint;
 
     public List<Vector2Int> wayPoints;
-    private  List<Vector2Int> tempPath = new List<Vector2Int>();
+    private  List<Location> tempPath = new List<Location>();
     public List<GameObject> path;
 
-    List<Location> openList = new List<Location>();
-    List<Location> closedList = new List<Location>();
 
     void Start()
     {        
@@ -76,11 +75,13 @@ public class MapController : MonoBehaviour
         }
 
         int counter = 0;
+        tempPath.Reverse();
+        tempPath.Add(new Location() { Position = endPoint });
         foreach (var item in tempPath)
         {
             counter++;
-            path.Add(tileSet[item.y, item.x]);
-            tileSet[item.y, item.x].name += counter.ToString();
+            path.Add(tileSet[item.Position.y, item.Position.x]);
+            tileSet[item.Position.y, item.Position.x].name += counter.ToString();
         }
 
         tempPath.Clear();
@@ -113,7 +114,7 @@ public class MapController : MonoBehaviour
 
         for (int i = 0; i < Mathf.RoundToInt(mapSize / 5); i++)
         {
-            tempPoint = new Vector2Int(UnityEngine.Random.Range(0, mapSize), UnityEngine.Random.Range(0, mapSize));
+            tempPoint = new Vector2Int(UnityEngine.Random.Range(1, mapSize - 1), UnityEngine.Random.Range(1, mapSize - 1));
         
             if (!wayPoints.Contains(tempPoint))
             {
@@ -137,8 +138,6 @@ public class MapController : MonoBehaviour
             }
         }
         FindPath(lastPoint, endPoint);
-        openList.Clear();
-        closedList.Clear();
     }
 
     private void FindPath(Vector2Int startPoint, Vector2Int endPoint)
@@ -146,6 +145,11 @@ public class MapController : MonoBehaviour
         Location current = null;
         var start = new Location { Position = startPoint };
         var end = new Location { Position = endPoint };
+
+        List<Location> openList = new List<Location>();
+
+        List<Location> closedList = new List<Location>();
+
 
         start.G = 0;
         start.H = ComputeHScore(start.Position.x, start.Position.y,endPoint.x,endPoint.y);
@@ -212,17 +216,16 @@ public class MapController : MonoBehaviour
     }
 
     private void RenderPath(List<Location> closed)
-    {        
+    {
 
+        var temp = new List<Location>();
         var current = closed.LastOrDefault();
-
-        tempPath.Add(current.Position);
 
         do
         {
             current = current.Parent;
 
-            tempPath.Add(current.Position);
+            temp.Add(current);
 
 
             //if (current.Position == startPoint)
@@ -234,7 +237,11 @@ public class MapController : MonoBehaviour
             
             
         } while (current != null && current.Parent != null && current.Position != startPoint);
-        
+
+        temp.OrderBy(x => x.F);
+
+        tempPath.InsertRange(0, temp);
+
     }
 
 }
