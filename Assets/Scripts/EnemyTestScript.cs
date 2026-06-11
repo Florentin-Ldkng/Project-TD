@@ -25,13 +25,16 @@ public class EnemyTestScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (index < Path.Count - 1 && other.CompareTag("WalkNode"))
+        if (other.gameObject.CompareTag("WalkNode"))
         {
-            index++;
-        }
-        else
-        {
-            Destroy(this.gameObject);
+            if (index < Path.Count - 1)
+            {
+                index++;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

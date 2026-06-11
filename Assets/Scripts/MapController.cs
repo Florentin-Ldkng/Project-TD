@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -8,6 +9,7 @@ public class MapController : MonoBehaviour
 {
     public GameObject pathPrefab, placablePrefab;
 
+    public ParticleSystem portal;
     [Range(3,100)]
     public int mapSize = 5;
 
@@ -84,7 +86,10 @@ public class MapController : MonoBehaviour
             //tileSet[item.Position.y, item.Position.x].name += counter.ToString();
         }
 
+        
         tempPath.Clear();
+
+        StartCoroutine(PortalSpawn());
     }
 
     private void CleanupMap()
@@ -242,6 +247,12 @@ public class MapController : MonoBehaviour
 
         tempPath.InsertRange(0, temp);
 
+    }
+
+    IEnumerator PortalSpawn()
+    {
+        yield return new WaitForSeconds(5);
+        Instantiate(portal, path.Last().transform.position + (Vector3.up * 1.5f), Quaternion.identity);
     }
 
 }

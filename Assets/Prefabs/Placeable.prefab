@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8076499038447476498}
   - component: {fileID: 120465302005202627}
   m_Layer: 0
-  m_Name: Placable
-  m_TagString: Untagged
+  m_Name: Placeable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

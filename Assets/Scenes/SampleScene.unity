@@ -244,70 +244,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 260741947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &250384494
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.8407638
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0000008710633
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.2554808
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109871628852976943, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 778426772761642901, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_Name
-      value: SK_BasicSkeleton_lv3
-      objectReference: {fileID: 0}
-    - target: {fileID: 778426772761642901, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 778426772761642901, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1445088763}
-  m_SourcePrefab: {fileID: 100100000, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
 --- !u!1 &260741942
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +413,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.30495745, g: 0, b: 0.5320754, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -557,7 +493,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -590,6 +526,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraScript
   controller: {fileID: 778739621}
+  expected: {x: 0, y: 0}
+  actual: {x: 0, y: 0, z: 0}
+  current: {x: 0, y: 0, z: 0}
+  moveVector: {x: 0, y: 0, z: 0}
+  scrollVector: {x: 0, y: 0, z: 0}
+  scrollActual: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,13 +561,13 @@ Light:
   serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize2D: {x: 10, y: 10}
+  m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -662,13 +604,13 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 6570
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShapeRadius: 0
+  m_ShapeRadius: 0.025
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -762,7 +704,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b8e0b7a05dc634cacbc5417fd05077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseController
-  camera: {fileID: 330585545}
+  _camera: {fileID: 330585545}
+  material: {fileID: 2100000, guid: a724bfe395164f34bbf4ece798e6e4d9, type: 2}
+  currGameobject: {fileID: 0}
+  prevGameobject: {fileID: 0}
+  TowerPrefabs:
+  - {fileID: 6259496015473233824, guid: b42d2b31f39c65e4da5629ba30a720cd, type: 3}
 --- !u!114 &500276115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,7 +736,19 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraScript, Assembly-CSharp
+        m_MethodName: CameraMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/1532-2A7/stick]'
   - m_PersistentCalls:
@@ -797,7 +756,19 @@ MonoBehaviour:
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 500276114}
+        m_TargetAssemblyTypeName: MouseController, Assembly-CSharp
+        m_MethodName: MouseClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/1532-2A7/trigger,/Keyboard/enter]'
   - m_PersistentCalls:
@@ -880,6 +851,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 251aea08-269f-4b50-80ba-4dab9de07362
     m_ActionName: 'Player/Maus[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 330585548}
+        m_TargetAssemblyTypeName: CameraScript, Assembly-CSharp
+        m_MethodName: Scroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 841d95a2-49f8-432f-afc8-0fcbfd3a556c
+    m_ActionName: 'Player/Scroll[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 500276114}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: RightMouseClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8d4838b8-0220-4805-9b21-c9ec22a57fc0
+    m_ActionName: 'Player/RightClick[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -916,6 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapController
   pathPrefab: {fileID: 6259496015473233824, guid: 0b14f5a8f6043fc41be598c8ed6619a3, type: 3}
   placablePrefab: {fileID: 6259496015473233824, guid: a7d77c6fb3cfb6d4b935e4f1719a8e69, type: 3}
+  portal: {fileID: 198412797518835156, guid: d92be02a90149e64d94ca3a2f20cd645, type: 3}
   mapSize: 3
   startPoint: {x: 0, y: 0}
   endPoint: {x: 0, y: 0}
@@ -1267,33 +1271,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &1445088762 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 778426772761642901, guid: 98e73b6d6bdb1924191a1329b1565fb1, type: 3}
-  m_PrefabInstance: {fileID: 250384494}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1445088763
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445088762}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4766d087fafa2e41bad63f0eb4c8146, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1522704598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManger
   mapController: {fileID: 778739621}
-  enemy: {fileID: 6089002521084547161, guid: 7beb704e7400f3e4bb59a17502367465, type: 3}
+  enemy: {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
   spawn1: 0
 --- !u!1001 &6385419791474895944
 PrefabInstance:
@@ -1702,7 +1679,6 @@ SceneRoots:
   - {fileID: 1030734959}
   - {fileID: 1522704602}
   - {fileID: 260741947}
-  - {fileID: 250384494}
   - {fileID: 778739622}
   - {fileID: 1766662505}
   - {fileID: 500276113}

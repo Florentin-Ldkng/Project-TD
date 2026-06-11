@@ -8,6 +8,7 @@ TagManager:
   - Tower
   - WalkNode
   - Path
+  - Placeable
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Line1
   - 
   - 
   - 
