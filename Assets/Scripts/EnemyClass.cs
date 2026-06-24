@@ -3,11 +3,9 @@ using UnityEngine;
 public class EnemyClass
 {
     public GameObject enemy {  get; set; }
-    public LineRenderer line {  get; set; }
-
-    public EnemyClass(GameObject enemy, LineRenderer line)
+    public GameObject target { get; set; }
+    public EnemyClass(GameObject enemy)
     { 
         this.enemy = enemy;
-        this.line = line;
     }
 }

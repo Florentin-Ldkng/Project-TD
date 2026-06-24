@@ -25,7 +25,7 @@ public class MapController : MonoBehaviour
     private  List<Location> tempPath = new List<Location>();
     public List<GameObject> path;
 
-
+    ParticleSystem portalParticle;
     void Start()
     {        
         GenerateMap();
@@ -106,6 +106,12 @@ public class MapController : MonoBehaviour
         tileGeneration = null;
         wayPoints = null;
         path.Clear();
+
+        if (portalParticle != null)
+        {
+            portalParticle.Stop();
+            Destroy(portalParticle);
+        }
     }
 
     private void GenerateTileset()
@@ -251,8 +257,10 @@ public class MapController : MonoBehaviour
 
     IEnumerator PortalSpawn()
     {
-        yield return new WaitForSeconds(5);
-        Instantiate(portal, path.Last().transform.position + (Vector3.up * 1.5f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        portalParticle = Instantiate(portal, path.Last().transform.position + (Vector3.up * 1.5f), Quaternion.identity);
+
+        
     }
 
 }

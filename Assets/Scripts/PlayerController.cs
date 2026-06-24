@@ -14,11 +14,21 @@ public class PlayerController : MonoBehaviour
     public GameObject prevGameobject;
 
     public List<GameObject> TowerPrefabs;
+    int layerMask;
+    uint lightmaskYellow,lightmaskWhite,lightmaskDefault;
+    uint noLine, yellowLine, whiteLine;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        layerMask = LayerMask.GetMask("FloorCheck");
+        lightmaskWhite = RenderingLayerMask.GetMask("Light Layer 1");
+        lightmaskYellow = RenderingLayerMask.GetMask("Light Layer 2");
+        lightmaskDefault= RenderingLayerMask.GetMask("Default");
+
+        noLine = lightmaskDefault;
+        whiteLine = lightmaskDefault | lightmaskWhite;
+        yellowLine = lightmaskDefault | lightmaskYellow;
     }
 
     // Update is called once per frame
@@ -44,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
         
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit,100,layerMask))
         {
             if (hit.collider.gameObject.CompareTag("Placeable") || hit.collider.gameObject.CompareTag("Tower"))
             {
@@ -93,12 +103,13 @@ public class PlayerController : MonoBehaviour
             {
                 var tempBuffer = Instantiate(TowerPrefabs[0], currGameobject.transform.position, Quaternion.identity);
 
-                tempBuffer.transform.SetParent(currGameobject.transform, true);
+                tempBuffer.transform.SetParent(currGameobject.transform.parent, true);
+
+                currGameobject.transform.SetParent(tempBuffer.transform, true);
 
                 SetIndex(currGameobject, false);
-                
-                currGameobject = tempBuffer;
-                
+
+                currGameobject.tag = "Tower";            
 
                 SetIndex(currGameobject, true);
 
@@ -115,12 +126,12 @@ public class PlayerController : MonoBehaviour
         switch (hit.tag)
         {
             case "Tower":
-                tempRenderer = hit.transform.GetChild(0).GetComponent<Renderer>();
-                tempIndex = (uint)LightLayers.YellowLine;
+                tempRenderer = hit.transform.GetComponent<Renderer>();
+                tempIndex = yellowLine;
                 break;
             case "Placeable":
                 tempRenderer = hit.GetComponent<Renderer>();
-                tempIndex = (uint)LightLayers.WhiteLine;
+                tempIndex = whiteLine;
                 break;
         }
 
@@ -130,7 +141,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            tempRenderer.renderingLayerMask = (uint)LightLayers.NoLine;
+            tempRenderer.renderingLayerMask = noLine;
         }
 
     }
@@ -141,15 +152,9 @@ public class PlayerController : MonoBehaviour
         {
             if (context.ReadValueAsButton() && currGameobject.CompareTag("Tower"))
             {
-                currGameobject.transform.Rotate(Vector3.up * 90);
+                currGameobject.transform.parent.Rotate(Vector3.up * 90);
             }
         }
-    }
+    }   
 
-    enum LightLayers
-    {
-        NoLine = 1,
-        WhiteLine = 3,
-        YellowLine = 4
-    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class CameraScript : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class CameraScript : MonoBehaviour
     public void CameraMove(InputAction.CallbackContext context)
     {
         current = moveVector;
-        expected = context.ReadValue<Vector2>();
+        expected = context.ReadValue<Vector2>() * ((this.transform.position.y / controller.mapSize * 10) / 100);
         moveVector = new Vector3(-expected.x, 0, -expected.y);
     }
 

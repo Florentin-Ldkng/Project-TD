@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceddabe0293a4ba44afe7013fab642e4, type: 3}
-  m_Name: BaseTower
+  m_Name: Ballista_LVL2
   m_EditorClassIdentifier: Assembly-CSharp::Tower
-  DebugMode: 1
-  range: 15
-  damage: 20
-  sDelay: 1
-  multitarget: 0
+  DebugMode: 0
+  BaseRange: 17
+  BaseDamage: 7
+  BaseShootingDelay: 0.75
+  Multitarget: 0
+  UsesRange: 1
+  MaxTargets: 0
+  DamageAllocation: 0
+  XPThreshhold: 150

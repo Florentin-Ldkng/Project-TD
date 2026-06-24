@@ -11,9 +11,9 @@ public class BaseTower : MonoBehaviour
 
     private void Awake()
     {
-        if (Range.transform.localScale.x != TowerStats.range)
+        if (Range.transform.localScale.x != TowerStats.BaseRange)
         {
-            Range.transform.localScale = new Vector3(TowerStats.range, TowerStats.range, TowerStats.range);
+            Range.transform.localScale = new Vector3(TowerStats.BaseRange, TowerStats.BaseRange, TowerStats.BaseRange);
         }
     }
 
@@ -43,7 +43,7 @@ public class BaseTower : MonoBehaviour
         do
         {
             Debug.Log("Shooting");
-            yield return new WaitForSeconds(TowerStats.sDelay);
+            yield return new WaitForSeconds(TowerStats.BaseShootingDelay);
         } while (TowerDetection.enemyList.Count > 0);
         routine = false;
         yield return null;

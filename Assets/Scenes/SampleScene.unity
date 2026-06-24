@@ -709,7 +709,7 @@ MonoBehaviour:
   currGameobject: {fileID: 0}
   prevGameobject: {fileID: 0}
   TowerPrefabs:
-  - {fileID: 6259496015473233824, guid: b42d2b31f39c65e4da5629ba30a720cd, type: 3}
+  - {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
 --- !u!114 &500276115
 MonoBehaviour:
   m_ObjectHideFlags: 0
