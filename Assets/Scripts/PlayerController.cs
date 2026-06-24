@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     uint lightmaskYellow,lightmaskWhite,lightmaskDefault;
     uint noLine, yellowLine, whiteLine;
 
+    private Vector2 lastPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,7 +47,15 @@ public class PlayerController : MonoBehaviour
     {
         // read the value for the "move" action each event call
         //Debug.Log(context.ReadValue<Vector2>());+
+
         
+        if (Vector2.Distance(lastPosition,context.ReadValue<Vector2>()) < 50f)
+        {
+            return;
+        }
+
+        lastPosition = context.ReadValue<Vector2>();
+
         if (_camera!=null)
         {
             ray = _camera.ScreenPointToRay(context.ReadValue<Vector2>());
