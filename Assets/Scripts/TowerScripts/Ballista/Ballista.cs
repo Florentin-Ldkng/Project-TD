@@ -22,6 +22,7 @@ public class Ballista : MonoBehaviour
 
 
     public int XPThreshhold;
+
     private int Range;
     private int Damage;
     private float ShootingDelay;
@@ -29,9 +30,11 @@ public class Ballista : MonoBehaviour
     private bool UsesRange;
     private int MaxTargets;
     private int DamageAllocation;
-
     private bool selectorIsRunning = false;
+
+    private int minClamp, maxClamp;
     
+
     void Start()
     {
         LoadStats();
@@ -54,17 +57,51 @@ public class Ballista : MonoBehaviour
         {
             foreach (var AttackPoint in AttackPoints)
             {
-                AttackPoint.transform.LookAt(TowerDetection.enemyList.FirstOrDefault(x => x.target = AttackPoint.gameObject).enemy.transform.position + Vector3.up);
-            }
-            
+                //var Enemy = TowerDetection.enemyList.FirstOrDefault(x => x.target = AttackPoint);
+                var Enemy = TowerDetection.enemyList.First();
+                Vector3 enemyPosition = Enemy.enemy.transform.position + Vector3.up;       
+                  
+                if (AttackPoint.CompareTag("Attachment"))
+                {
+                    //SetCorrectRotationClamp(AttackPoint.name);
+                    //
+                    //Vector3 directionToEnemy = enemyPosition - AttackPoint.transform.position;
+                    //Quaternion targetRotationWorld = Quaternion.LookRotation(directionToEnemy);
+                    //
+                    //if (AttackPoint.name == "L")
+                    //{ Debug.Log(AttackPoint.transform.eulerAngles.y); }
+                    //
+                    //if (AttackPoint.transform.parent != null)
+                    //{
+                    //    Quaternion localTargetRotation = Quaternion.Inverse(AttackPoint.transform.parent.rotation) * targetRotationWorld;      
+                    //    
+                    //    if (localTargetRotation.eulerAngles.y >= maxClamp || localTargetRotation.eulerAngles.y <= minClamp)
+                    //    {
+                    //        return;
+                    //    }
+                    //
+                    //    AttackPoint.transform.localRotation = localTargetRotation;
+                    //}
+                    //else
+                    //{
+                    //    AttackPoint.transform.rotation = targetRotationWorld;
+                    //}
 
-            //foreach (var Attackpoint in AttackPoints)
-            //{
-            //
-            //}
-            
-            //Debug.Log($"{AttackPoints[1].gameObject.name}:{Vector3.Angle(AttackPoints[1].transform.position, TowerDetection.enemyList[0].enemy.transform.position)} || {AttackPoints[2].gameObject.name}:{Vector3.Angle(AttackPoints[2].transform.position, TowerDetection.enemyList[0].enemy.transform.position)}");
-        }
+                    AttackPoint.transform.LookAt(enemyPosition);
+
+                    if (AttackPoint.name == "L")
+                    {
+                        Debug.Log(AttackPoint.transform.localRotation.y);
+                    }
+                }
+                else
+                {
+                    AttackPoint.transform.LookAt(enemyPosition);
+                }
+
+            }            
+
+          }
 
     }
 
@@ -108,7 +145,7 @@ public class Ballista : MonoBehaviour
     
     private void EnemyHandler()
     {
-        StartCoroutine(Shooting(AttackPoints[0]));
+        //StartCoroutine(Shooting(AttackPoints[0]));
 
         if (selectorIsRunning == false)
         {
@@ -127,6 +164,23 @@ public class Ballista : MonoBehaviour
         
     }
 
+    private void SetCorrectRotationClamp(string name)
+    {        
+        switch (name)
+        {
+            case "R":
+                minClamp = 10;
+                maxClamp = 170;
+                break;
+            case "L":
+                minClamp = 10;
+                maxClamp = 170;
+                break;
+            default:
+                Debug.LogError($"SetCorrectRotationClamp - Object has wrong name - {name}");
+                break;
+        }
+    }
     IEnumerator Shooting(GameObject Attackpoint)
     {
         do

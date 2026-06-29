@@ -48,17 +48,18 @@ public class PlayerController : MonoBehaviour
         // read the value for the "move" action each event call
         //Debug.Log(context.ReadValue<Vector2>());+
 
-        
-        if (Vector2.Distance(lastPosition,context.ReadValue<Vector2>()) < 50f)
+        Vector2 ContextValue = context.ReadValue<Vector2>();
+
+        if (Vector2.Distance(lastPosition, ContextValue) < 50f)
         {
             return;
         }
 
-        lastPosition = context.ReadValue<Vector2>();
+        lastPosition = ContextValue;
 
         if (_camera!=null)
         {
-            ray = _camera.ScreenPointToRay(context.ReadValue<Vector2>());
+            ray = _camera.ScreenPointToRay(ContextValue);
         }
         
 

@@ -306,6 +306,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7437384594538329592}
     m_Modifications:
+    - target: {fileID: 1856717652220521836, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+      propertyPath: m_Name
+      value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856717652220521836, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
+      objectReference: {fileID: 0}
     - target: {fileID: 7109891278860574080, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
       propertyPath: m_Name
       value: 5
@@ -369,6 +377,14 @@ PrefabInstance:
     - target: {fileID: 7629301033974466362, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041060791395027432, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+      propertyPath: m_Name
+      value: L
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041060791395027432, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -715,6 +731,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2321701085573052386, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+      propertyPath: m_Name
+      value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321701085573052386, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120840200643336278, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+      propertyPath: m_Name
+      value: L
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120840200643336278, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -836,6 +868,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4616683234599007318, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      propertyPath: m_Name
+      value: L
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616683234599007318, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616683234599007318, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596493629175792372, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      propertyPath: m_Name
+      value: R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596493629175792372, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      propertyPath: m_TagString
+      value: Attachment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -863,8 +915,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallistaAttackPoints
   Attackpoints:
   - {fileID: 2436911240444961643}
-  - {fileID: 6162755300276962311}
   - {fileID: 9005909592058032805}
+  - {fileID: 6162755300276962311}
 --- !u!4 &1106572318629330653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3725038017452111918, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}

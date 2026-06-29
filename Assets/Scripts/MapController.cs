@@ -188,7 +188,7 @@ public class MapController : MonoBehaviour
                     {
                         if (closedList.FirstOrDefault(x => x.Position == tempVector) == null && openList.FirstOrDefault(x => x.Position == tempVector) == null)
                         {
-                            openList.Add(TileDetection(tempVector, current));
+                            openList.Add(TileDetection(tempVector, current,endPoint));
                         }               
                         
                     }
@@ -213,13 +213,13 @@ public class MapController : MonoBehaviour
         return Math.Abs(targetX - x) + Math.Abs(targetY - y);
     }
 
-    private Location TileDetection(Vector2Int tempVector, Location current)
+    private Location TileDetection(Vector2Int tempVector, Location current, Vector2Int curEnd)
     {
         Location tempLocation = new Location();
 
         tempLocation.Position = tempVector;
         tempLocation.G = current.G + 1;
-        tempLocation.H = ComputeHScore(tempLocation.Position.x, tempLocation.Position.y, endPoint.x, endPoint.y);
+        tempLocation.H = ComputeHScore(tempLocation.Position.x, tempLocation.Position.y, curEnd.x, curEnd.y);
         tempLocation.F = tempLocation.G + tempLocation.H;
         tempLocation.Parent = current;
 
@@ -249,7 +249,7 @@ public class MapController : MonoBehaviour
             
         } while (current != null && current.Parent != null && current.Position != startPoint);
 
-        temp.OrderBy(x => x.F);
+       
 
         tempPath.InsertRange(0, temp);
 

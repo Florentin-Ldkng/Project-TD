@@ -9,6 +9,7 @@ TagManager:
   - WalkNode
   - Path
   - Placeable
+  - Attachment
   layers:
   - Default
   - TransparentFX
