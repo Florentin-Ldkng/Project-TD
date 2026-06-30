@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ballista : MonoBehaviour
@@ -57,8 +58,8 @@ public class Ballista : MonoBehaviour
         {
             foreach (var AttackPoint in AttackPoints)
             {
-                //var Enemy = TowerDetection.enemyList.FirstOrDefault(x => x.target = AttackPoint);
-                var Enemy = TowerDetection.enemyList.First();
+                var Enemy = TowerDetection.enemyList.First(x => x.target = AttackPoint);
+                //var Enemy = TowerDetection.enemyList.First();
                 Vector3 enemyPosition = Enemy.enemy.transform.position + Vector3.up;       
                   
                 if (AttackPoint.CompareTag("Attachment"))
@@ -89,10 +90,10 @@ public class Ballista : MonoBehaviour
 
                     AttackPoint.transform.LookAt(enemyPosition);
 
-                    if (AttackPoint.name == "L")
-                    {
-                        Debug.Log(AttackPoint.transform.localRotation.y);
-                    }
+                    //if (AttackPoint.name == "L")
+                    //{
+                    //    Debug.Log(AttackPoint.transform.localRotation.y);
+                    //}
                 }
                 else
                 {
@@ -113,9 +114,16 @@ public class Ballista : MonoBehaviour
     private void OnDisable()
     {
         TowerDetection.OnDetection -= EnemyHandler;
+        ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
     }
     private void LoadStats()
     {
+
+        if(Range != 0)
+        {
+            ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
+        }
+
         Range = BallistaBaseStats[CurrentLevel].BaseRange;
         Damage = BallistaBaseStats[CurrentLevel].BaseDamage;
         ShootingDelay = BallistaBaseStats[CurrentLevel].BaseShootingDelay;
@@ -130,6 +138,8 @@ public class Ballista : MonoBehaviour
 
         Targets.Clear();
         Targets.Capacity = MaxTargets;
+
+        ballistaAttackPoints[CurrentLevel].OnRotationLimitHit += TowerReset;
     }
 
     private void EnableTower()
@@ -164,6 +174,16 @@ public class Ballista : MonoBehaviour
         
     }
 
+    private void TowerReset()
+    {
+        //ballistaAttackPoints[CurrentLevel].errorPoint.transform.rotation = Quaternion.identity;
+
+        //var errorAttachment = ballistaAttackPoints[CurrentLevel].errorPoint.transform.parent.gameObject;
+        //TowerDetection.enemyList.FirstOrDefault(x => x.target = errorAttachment).target = null;
+        //
+        //errorAttachment.transform.rotation = Quaternion.identity;
+    }
+
     private void SetCorrectRotationClamp(string name)
     {        
         switch (name)
@@ -195,11 +215,32 @@ public class Ballista : MonoBehaviour
     {
         do
         {
-            foreach (var enemy in TowerDetection.enemyList)
-            {
-                enemy.target = AttackPoints[0].gameObject;
-            }
-            yield return new WaitForSeconds(1f);
+            //TODO idee ist gut nur ich muss es umdrehen. auf den attackpoints müssen die ziele verwaltet werden und der code muss nur ausgeführt werden wenn ich das ziel des attackpoints verliere durch z.b. tot / oder halt den lock
+            //Das einzige wofür ich keine lösung finde ist wie ich dafür sorge das der attackpoint nicht sofort wieder das gleiche ziel auswählt weil dann wäre die ganze logik fürn arsch (Potentiell non issue weil der gegner dann eh näher an den anderen Attackpoints sein sollte)
+
+
+            //foreach (var attackPoint in AttackPoints)
+            //{
+            //    foreach (var enemy in TowerDetection.enemyList.Where(x => x.target == null))
+            //    {
+            //
+            //        float shortest = 1000;
+            //        GameObject shortestGO = null;
+            //    
+            //        float calc = Vector3.Distance(attackPoint.transform.position, enemy.enemy.transform.position);
+            //        if (calc < shortest)
+            //        {
+            //            shortest = calc;
+            //            shortestGO = attackPoint;
+            //            
+            //        }
+            //
+            //        enemy.target = shortestGO;
+            //        Debug.Log($"Enemy is targeted by: {shortestGO?.name}");
+            //
+            //    }               
+            //}
+            //yield return new WaitForSeconds(1f);
         } while (TowerDetection.enemyList.Count > 0);
         yield return null;
         selectorIsRunning = false;

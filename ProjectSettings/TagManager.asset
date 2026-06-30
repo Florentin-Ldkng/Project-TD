@@ -10,6 +10,7 @@ TagManager:
   - Path
   - Placeable
   - Attachment
+  - BallistaFix
   layers:
   - Default
   - TransparentFX
