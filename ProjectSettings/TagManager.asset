@@ -11,6 +11,7 @@ TagManager:
   - Placeable
   - Attachment
   - BallistaFix
+  - Main
   layers:
   - Default
   - TransparentFX
