@@ -1204,6 +1204,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &7828745026282269467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6101292083220740575}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6101292083220740575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7828745026282269467}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 5.2000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 86927701321926820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8401436388715285062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,6 +1270,37 @@ Transform:
   - {fileID: 2644619037188870160}
   - {fileID: 8165832965390067918}
   m_Father: {fileID: 1155500027855624222}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8498456516021175019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255159035383044579}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &255159035383044579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498456516021175019}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6242714, z: 5.2000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2936353677657035254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8960095406667495957
 GameObject:
@@ -1412,7 +1474,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2731067896235876468, guid: 2d37f2f8121bcf341ba0e1cf74088329, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 255159035383044579}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2601638280100864777, guid: 2d37f2f8121bcf341ba0e1cf74088329, type: 3}
       insertIndex: -1
@@ -1426,6 +1491,11 @@ GameObject:
 --- !u!4 &2483600243182798897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3409559821581040051, guid: 2d37f2f8121bcf341ba0e1cf74088329, type: 3}
+  m_PrefabInstance: {fileID: 947644697624719746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2936353677657035254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2731067896235876468, guid: 2d37f2f8121bcf341ba0e1cf74088329, type: 3}
   m_PrefabInstance: {fileID: 947644697624719746}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2971344341966803595 stripped
@@ -1447,7 +1517,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BallistaAttackPoints
   Attackpoints:
   - {fileID: 2457703579990191832}
-  Shootpoints: []
+  Shootpoints:
+  - {fileID: 8498456516021175019}
   errorPoint: {fileID: 0}
 --- !u!1001 &1779595918193881076
 PrefabInstance:
@@ -1841,7 +1912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5642915072477496837, guid: 5798d4dfe7ccb8c46886485a8ef575c0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2181,6 +2252,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4458141103644724823, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6101292083220740575}
     - targetCorrespondingSourceObject: {fileID: 7072896727962540110, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8398814828889944929}
@@ -2201,6 +2275,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 530010995022616892}
   m_SourcePrefab: {fileID: 100100000, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+--- !u!4 &86927701321926820 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4458141103644724823, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
+  m_PrefabInstance: {fileID: 4389509894489802483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &292880235129349223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4105645668687585940, guid: 8c473cdc18bace5448708338fa3a49bd, type: 3}
@@ -2222,7 +2301,8 @@ MonoBehaviour:
   - {fileID: 2436911240444961643}
   - {fileID: 9005909592058032805}
   - {fileID: 6162755300276962311}
-  Shootpoints: []
+  Shootpoints:
+  - {fileID: 7828745026282269467}
   errorPoint: {fileID: 0}
 --- !u!136 &530010995022616892
 CapsuleCollider:

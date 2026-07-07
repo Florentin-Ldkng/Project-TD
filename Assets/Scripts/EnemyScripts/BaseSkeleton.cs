@@ -7,27 +7,33 @@ public class BaseSkeleton : MonoBehaviour
 {
     public List<GameObject> Path;
 
+    public Enemy EnemyStats;
     public Animator animator;
 
     public int index = 0;
 
     private Projectile lastHit;
+
+    private int Hp;
+    private int Armor;
+    private float Speed;
+    private int XPGiven;
+    private bool stealth;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Hp = EnemyStats.Hp;
+        Armor = EnemyStats.Armor; 
+        Speed = EnemyStats.Speed;
+        XPGiven = EnemyStats.XPGiven;
+        stealth = EnemyStats.stealth;
     }
 
     private void FixedUpdate()
     {
         this.transform.LookAt(Path[index].transform.position + (Vector3.up * .5f));
-        this.transform.Translate((Vector3.forward * 0.6f) * Time.deltaTime);
+        this.transform.Translate((Vector3.forward * Speed) * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,12 +54,16 @@ public class BaseSkeleton : MonoBehaviour
     public void RegisterProjectile(Projectile projectile)
     {
         lastHit = projectile;
+        Hp -= projectile.damage;
+
+        if (Hp <= 0)
         Destroy(this.gameObject);
     }
 
     private void OnDisable()
     {
         GameObject.Find("Map").BroadcastMessage("RemoveEnemy", this.gameObject);
-        lastHit.originTower.SendMessage("EarnXP", 100);
+        if (lastHit != null)
+        lastHit.originTower.SendMessage("EarnXP", XPGiven);
     }
 }

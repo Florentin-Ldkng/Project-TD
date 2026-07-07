@@ -157,7 +157,7 @@ public class Ballista : MonoBehaviour
     public void EarnXP(int earnedXP)
     {
         XP += earnedXP;
-        if (XP >= XPThreshhold && CurrentLevel < 4)
+        if (XP >= XPThreshhold && CurrentLevel < 3)
         {
             XP = XPThreshhold - XP;
             CurrentLevel++; 

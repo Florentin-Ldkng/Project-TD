@@ -5,8 +5,9 @@ public class EnemyController : MonoBehaviour
 {
     public MapController mapController;
     public GameObject enemy;
-    public bool spawn1 = false;
 
+
+    float time = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,9 +17,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawn1)
+        time += Time.deltaTime;
+        if (time >= 5f)
         {
-            spawn1 = false;
+            time = 0;
 
             var spawn = Instantiate(enemy,mapController.path.First().transform.position + (Vector3.up * 0.5f) ,Quaternion.identity,this.transform);
             spawn.GetComponent<BaseSkeleton>().Path = mapController.path;

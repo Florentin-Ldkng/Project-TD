@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
   Path: []
+  EnemyStats: {fileID: 11400000, guid: 4d1bb66e55243f340871eff3f7eb172b, type: 2}
   animator: {fileID: 9085972644180743167}
   index: 0
 --- !u!54 &2617771140839984933
