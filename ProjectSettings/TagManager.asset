@@ -12,6 +12,7 @@ TagManager:
   - Attachment
   - BallistaFix
   - Main
+  - BallistaProjectile
   layers:
   - Default
   - TransparentFX

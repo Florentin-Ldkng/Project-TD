@@ -19,11 +19,15 @@ public class Ballista : MonoBehaviour
 
     public ParticleSystem Levelup;
 
+    public GameObject ProjectilesEmpty;
     public int CurrentLevel = 0;
     public int XP = 0;
 
 
     public int XPThreshhold;
+
+    bool isShooting = false;
+
 
     private int Range;
     private int Damage;
@@ -35,7 +39,7 @@ public class Ballista : MonoBehaviour
     private bool selectorIsRunning = false;
 
     private int LAttach = 1, RAttach = 1;
-    
+
 
     void Start()
     {
@@ -46,26 +50,17 @@ public class Ballista : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //XP++;
-        //
-        //if(XP >= XPThreshhold && CurrentLevel < 4)
-        //{
-        //    XP = 0;
-        //    CurrentLevel++; 
-        //    LevelUp();
-        //}
-
         foreach (var SideTurrets in AttackPoints.FindAll(x => x.gameObject.CompareTag("Attachment")))
         {
             SideTurrets.transform.Rotate(new Vector3(0, LAttach, 0));
         }
 
 
-        if(TowerDetection.enemyList.Count > 0)
+        if (TowerDetection.enemyList.Count > 0)
         {
             AttackPoints[0].transform.LookAt(TowerDetection.enemyList.First().enemy.transform.position + Vector3.up * 1.5f);
         }
-        
+
 
     }
 
@@ -82,7 +77,7 @@ public class Ballista : MonoBehaviour
     private void LoadStats()
     {
 
-        if(Range != 0)
+        if (Range != 0)
         {
             ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
         }
@@ -115,26 +110,27 @@ public class Ballista : MonoBehaviour
     {
         DetectionRange.transform.localScale = new Vector3(Range, Range, Range);
     }
-    
+
     private void EnemyHandler()
     {
-        //StartCoroutine(Shooting(AttackPoints[0]));
+        if (isShooting == false)
+        {
+            StartCoroutine(Shooting());
+        }
 
         if (selectorIsRunning == false)
         {
             selectorIsRunning = true;
             StartCoroutine(TargetSelector());
         }
-     }
-    
+    }
+
     private void LevelUp()
     {
-
         Levelup.Play();
         LoadStats();
         EnableTower();
         UpdateRange();
-        
     }
 
     private void TowerReset()
@@ -142,30 +138,50 @@ public class Ballista : MonoBehaviour
         SetCorrectRotation(ballistaAttackPoints[CurrentLevel].errorPoint.name);
     }
 
-   private void SetCorrectRotation(string name)
-   {        
-       switch (name)
-       {
-           case "R":
+    private void SetCorrectRotation(string name)
+    {
+        switch (name)
+        {
+            case "R":
                 RAttach *= -1;
-               break;
-           case "L":
+                break;
+            case "L":
                 LAttach *= -1;
                 break;
-           default:
-               Debug.LogError($"SetCorrectRotationClamp - Object has wrong name - {name}");
-               break;
-       }
-   }
-    IEnumerator Shooting(GameObject Attackpoint)
+            default:
+                Debug.LogError($"SetCorrectRotationClamp - Object has wrong name - {name}");
+                break;
+        }
+    }
+
+    public void EarnXP(int earnedXP)
     {
+        XP += earnedXP;
+        if (XP >= XPThreshhold && CurrentLevel < 4)
+        {
+            XP = XPThreshhold - XP;
+            CurrentLevel++; 
+            LevelUp();
+        }
+    }
+
+    IEnumerator Shooting()
+    {
+        isShooting = true;
+        yield return new WaitForSeconds(ShootingDelay);
         do
         {
-            var a = Instantiate(ProjectileBig, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform);    
+            var a = Instantiate(ProjectileBig, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
+            a.GetComponent<Ballista_Projectile>().projectile.setValues(Damage, 1,StatusEffects.None,this.gameObject);
+
             yield return new WaitForSeconds(ShootingDelay);
         } while (TowerDetection.enemyList.Count > 0);
+
+        isShooting = false;
         yield return null;
     }
+
+
 
     IEnumerator TargetSelector()
     {

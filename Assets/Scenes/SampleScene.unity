@@ -628,7 +628,7 @@ MonoBehaviour:
     m_ActionId: 8d4838b8-0220-4805-9b21-c9ec22a57fc0
     m_ActionName: 'Player/RightClick[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

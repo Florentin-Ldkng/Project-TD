@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class BaseSkeleton : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class BaseSkeleton : MonoBehaviour
     public Animator animator;
 
     public int index = 0;
+
+    private Projectile lastHit;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,5 +43,17 @@ public class BaseSkeleton : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+    }
+
+    public void RegisterProjectile(Projectile projectile)
+    {
+        lastHit = projectile;
+        Destroy(this.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        GameObject.Find("Map").BroadcastMessage("RemoveEnemy", this.gameObject);
+        lastHit.originTower.SendMessage("EarnXP", 100);
     }
 }

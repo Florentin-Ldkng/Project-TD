@@ -874,6 +874,7 @@ Transform:
   - {fileID: 7437384594538329592}
   - {fileID: 6545066048641667383}
   - {fileID: 2616760635271551564}
+  - {fileID: 7920488891844690419}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3808493037094351205
@@ -910,9 +911,10 @@ MonoBehaviour:
   AttackPoints: []
   DetectionRange: {fileID: 6553970347878702633}
   TowerDetection: {fileID: 1143802537948489387}
-  ProjectileBig: {fileID: 8346639887282610483, guid: 89005052879dac04e9d32ad7a75066f1, type: 3}
+  ProjectileBig: {fileID: 8204834379312223003, guid: 89180b9f706d655428dd4d17e7c8a4ea, type: 3}
   ProjectileSmall: {fileID: 7165027595862881997, guid: 5fbe106673798494691b553ca0408089, type: 3}
   Levelup: {fileID: 2801330721420447262}
+  ProjectilesEmpty: {fileID: 7180193239894630218}
   CurrentLevel: 0
   XP: 0
   XPThreshhold: 0
@@ -1081,6 +1083,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &7180193239894630218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7920488891844690419}
+  m_Layer: 0
+  m_Name: Projectiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7920488891844690419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7180193239894630218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1155500027855624222}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7285950202056049680
 GameObject:
   m_ObjectHideFlags: 0

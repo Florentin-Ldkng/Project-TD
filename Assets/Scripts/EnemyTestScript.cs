@@ -6,6 +6,8 @@ public class EnemyTestScript : MonoBehaviour
     public List<GameObject> Path;
 
     public int index = 0;
+
+    public int health = 100;
     void Start()
     {
         
@@ -20,21 +22,36 @@ public class EnemyTestScript : MonoBehaviour
     private void FixedUpdate()
     {
         this.transform.LookAt(Path[index].transform.position + (Vector3.up * 1.5f));
-        this.transform.Translate(Vector3.forward * 0.5f);        
+        this.transform.Translate(Vector3.forward * 0.5f);      
+        
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("WalkNode"))
+        switch (other.gameObject.tag)
         {
-            if (index < Path.Count - 1)
-            {
-                index++;
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            case "WalkNode":
+                if (index < Path.Count - 1)
+                {
+                    index++;
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
+                break;            
+            default:
+                Debug.Log(other.tag); break;
+
         }
+    }
+
+    public void RegisterProjectile()
+    {
+        Debug.Log("TookDamage");
     }
 }
