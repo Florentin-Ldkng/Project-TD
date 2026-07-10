@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 500276113}
   - component: {fileID: 500276115}
   - component: {fileID: 500276114}
+  - component: {fileID: 500276116}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -449,6 +450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseController
   _camera: {fileID: 330585545}
+  _gameManager: {fileID: 500276116}
+  _mapController: {fileID: 778739621}
   material: {fileID: 2100000, guid: a724bfe395164f34bbf4ece798e6e4d9, type: 2}
   currGameobject: {fileID: 0}
   prevGameobject: {fileID: 0}
@@ -632,6 +635,26 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &500276116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500276112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40720fdab6faac8489e1e86b5e8d1157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  Wave: 0
+  Map: 3
+  PlayerHP: 100
+  Gold: 10
+  EnemyBudget: 10
+  _playerController: {fileID: 500276114}
+  _mapController: {fileID: 778739621}
+  _enemyController: {fileID: 1766662506}
 --- !u!1 &778739620
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +692,7 @@ MonoBehaviour:
   endPoint: {x: 0, y: 0}
   wayPoints: []
   path: []
+  towers: []
 --- !u!4 &778739622
 Transform:
   m_ObjectHideFlags: 0
@@ -778,7 +802,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManger
   mapController: {fileID: 778739621}
-  enemy: {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
+  enemy:
+  - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
+  enemyValue: 01000000
+  activeEnemies: []
+  Budget: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -787,5 +815,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 778739622}
-  - {fileID: 1766662505}
   - {fileID: 500276113}
+  - {fileID: 1766662505}

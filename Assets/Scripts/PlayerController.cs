@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public Camera _camera;
+    public GameManager _gameManager;
+    public MapController _mapController;
 
     public Material material;
     private Ray ray;
@@ -16,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public List<GameObject> TowerPrefabs;
     int layerMask;
-    uint lightmaskYellow,lightmaskWhite,lightmaskDefault;
+    uint lightmaskYellow, lightmaskWhite, lightmaskDefault;
     uint noLine, yellowLine, whiteLine;
 
     private Vector2 lastPosition;
@@ -26,7 +28,7 @@ public class PlayerController : MonoBehaviour
         layerMask = LayerMask.GetMask("FloorCheck");
         lightmaskWhite = RenderingLayerMask.GetMask("Light Layer 1");
         lightmaskYellow = RenderingLayerMask.GetMask("Light Layer 2");
-        lightmaskDefault= RenderingLayerMask.GetMask("Default");
+        lightmaskDefault = RenderingLayerMask.GetMask("Default");
 
         noLine = lightmaskDefault;
         whiteLine = lightmaskDefault | lightmaskWhite;
@@ -36,12 +38,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        
+
     }
     public void MouseMove(InputAction.CallbackContext context)
     {
@@ -57,15 +59,15 @@ public class PlayerController : MonoBehaviour
 
         lastPosition = ContextValue;
 
-        if (_camera!=null)
+        if (_camera != null)
         {
             ray = _camera.ScreenPointToRay(ContextValue);
         }
-        
 
-        
+
+
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit,100,layerMask))
+        if (Physics.Raycast(ray, out hit, 100, layerMask))
         {
             if (hit.collider.gameObject.CompareTag("Placeable") || hit.collider.gameObject.CompareTag("Tower"))
             {
@@ -74,16 +76,16 @@ public class PlayerController : MonoBehaviour
                     currGameobject = hit.collider.gameObject;
 
                     SetIndex(currGameobject, true);
-                    
+
 
                     if (prevGameobject != null)
                     {
                         SetIndex(prevGameobject, false);
-                    }                   
+                    }
 
                     prevGameobject = currGameobject;
                 }
-                
+
             }
             else
             {
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
                 {
                     SetIndex(prevGameobject, false);
                     currGameobject = null;
-                    prevGameobject= null;
+                    prevGameobject = null;
                 }
             }
 
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MouseClick(InputAction.CallbackContext context)
     {
-        if (currGameobject != null)
+        if (currGameobject != null && _gameManager.Gold >= 10)
         {
             if (context.ReadValueAsButton() && currGameobject.CompareTag("Placeable"))
             {
@@ -120,11 +122,15 @@ public class PlayerController : MonoBehaviour
 
                 SetIndex(currGameobject, false);
 
-                currGameobject.tag = "Tower";            
+                currGameobject.tag = "Tower";
 
                 SetIndex(currGameobject, true);
 
                 prevGameobject = currGameobject;
+
+                _gameManager.Gold -= 10;
+
+                _mapController.towers.Add(tempBuffer);
             }
         }
     }
@@ -166,6 +172,6 @@ public class PlayerController : MonoBehaviour
                 currGameobject.transform.parent.Rotate(Vector3.up * 90);
             }
         }
-    }   
+    }
 
 }

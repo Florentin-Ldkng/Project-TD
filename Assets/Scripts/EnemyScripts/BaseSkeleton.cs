@@ -62,7 +62,7 @@ public class BaseSkeleton : MonoBehaviour
 
     private void OnDisable()
     {
-        GameObject.Find("Map").BroadcastMessage("RemoveEnemy", this.gameObject);
+        GameObject.Find("Enemies").BroadcastMessage("RemoveEnemy", this.gameObject);
         if (lastHit != null)
         lastHit.originTower.SendMessage("EarnXP", XPGiven);
     }

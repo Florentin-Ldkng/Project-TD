@@ -13,8 +13,6 @@ public class MapController : MonoBehaviour
     [Range(3,100)]
     public int mapSize = 5;
 
-    private int currentMapSize = 5;
-
     public GameObject[,] tileSet;
     public bool[,] tileGeneration;
 
@@ -25,24 +23,25 @@ public class MapController : MonoBehaviour
     private  List<Location> tempPath = new List<Location>();
     public List<GameObject> path;
 
+    public List<GameObject> towers = new List<GameObject>();
     ParticleSystem portalParticle;
     void Start()
     {        
-        GenerateMap();
-        currentMapSize = mapSize;
+        //GenerateMap();
+        //currentMapSize = mapSize;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentMapSize != mapSize)
-        {
-            GenerateMap();
-            currentMapSize = mapSize;
-        }
+        //if (currentMapSize != mapSize)
+        //{
+        //    GenerateMap();
+        //    currentMapSize = mapSize;
+        //}
     }
 
-    private void GenerateMap()
+    public void GenerateMap()
     {
         tempPath.Clear();
 
@@ -102,6 +101,10 @@ public class MapController : MonoBehaviour
             }
         }
 
+        foreach (var item in towers)
+            Destroy(item);
+
+        towers.Clear();
         tileSet = null;
         tileGeneration = null;
         wayPoints = null;
@@ -259,7 +262,6 @@ public class MapController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         portalParticle = Instantiate(portal, path.Last().transform.position + (Vector3.up * 1.5f), Quaternion.identity);
-
         
     }
 
