@@ -20,4 +20,4 @@ MonoBehaviour:
   UsesRange: 1
   MaxTargets: 3
   DamageAllocation: 70
-  XPThreshhold: 1350
+  XPThreshhold: 1000

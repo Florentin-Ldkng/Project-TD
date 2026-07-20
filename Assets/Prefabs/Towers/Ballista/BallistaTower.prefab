@@ -90,6 +90,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &460415050918194038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8310514809565351849}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8310514809565351849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460415050918194038}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.04, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2029172693704069347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &557126496551806097
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +571,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &5216361603700486835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8735184598336616908}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8735184598336616908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5216361603700486835}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.05, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3930247447320269091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5395204490944978690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1677,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 331987500002787095, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8310514809565351849}
     - targetCorrespondingSourceObject: {fileID: 1337483819573147606, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
       insertIndex: -1
       addedObject: {fileID: 292702790786436126}
@@ -1643,6 +1708,11 @@ GameObject:
 --- !u!4 &737982848074717218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1337483819573147606, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
+  m_PrefabInstance: {fileID: 1779595918193881076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2029172693704069347 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 331987500002787095, guid: 1dbeb6517978fea41b512c254b292881, type: 3}
   m_PrefabInstance: {fileID: 1779595918193881076}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4015256337811976132 stripped
@@ -1686,7 +1756,8 @@ MonoBehaviour:
   - {fileID: 4015256337811976132}
   - {fileID: 105280236045943448}
   - {fileID: 7334721037998646812}
-  Shootpoints: []
+  Shootpoints:
+  - {fileID: 460415050918194038}
   errorPoint: {fileID: 0}
 --- !u!136 &3939179016359230363
 CapsuleCollider:
@@ -2057,6 +2128,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 79677126160651428, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8735184598336616908}
     - targetCorrespondingSourceObject: {fileID: 3130994027626245464, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1375285540200377109}
@@ -2123,7 +2197,8 @@ MonoBehaviour:
   - {fileID: 6379488298229941758}
   - {fileID: 1704696023208096357}
   - {fileID: 2080497512043797969}
-  Shootpoints: []
+  Shootpoints:
+  - {fileID: 5216361603700486835}
   errorPoint: {fileID: 0}
 --- !u!136 &1745770255394926818
 CapsuleCollider:
@@ -2148,6 +2223,11 @@ CapsuleCollider:
   m_Height: 13.153599
   m_Direction: 1
   m_Center: {x: -0.0000075499215, y: 4.4688034, z: 0.011451641}
+--- !u!4 &3930247447320269091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 79677126160651428, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}
+  m_PrefabInstance: {fileID: 4003729577060763015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6379488298229941758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8005258395545190521, guid: cca6b8cb7c5f7714c9e83398632ee786, type: 3}

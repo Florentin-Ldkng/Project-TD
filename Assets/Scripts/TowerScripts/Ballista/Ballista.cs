@@ -157,7 +157,7 @@ public class Ballista : MonoBehaviour
     public void EarnXP(int earnedXP)
     {
         XP += earnedXP;
-        if (XP >= XPThreshhold && CurrentLevel < 3)
+        if (XP >= XPThreshhold && CurrentLevel < 4)
         {
             XP = XPThreshhold - XP;
             CurrentLevel++; 
@@ -172,7 +172,7 @@ public class Ballista : MonoBehaviour
         do
         {
             var a = Instantiate(ProjectileBig, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
-            a.GetComponent<Ballista_Projectile>().projectile.setValues(Damage, 1,StatusEffects.None,this.gameObject);
+            a.GetComponent<Ballista_Projectile>().projectile.setValues(Damage, .4f,StatusEffects.None,this.gameObject);
 
             yield return new WaitForSeconds(ShootingDelay);
         } while (TowerDetection.enemyList.Count > 0);
