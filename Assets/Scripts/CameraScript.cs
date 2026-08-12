@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class CameraScript : MonoBehaviour
 {
-    public MapController controller;
+    public GameManager GameManager;
     
     public Vector2 expected = Vector2.zero;   
     
@@ -20,8 +20,8 @@ public class CameraScript : MonoBehaviour
         // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        transform.position = new Vector3((controller.mapSize * -4) / 2, controller.mapSize * 5, controller.mapSize * 0.5f);
-        scrollActual = Vector3.down * controller.mapSize;
+        transform.position = new Vector3((GameManager.MapSize * -4) / 2, GameManager.MapSize * 5, GameManager.MapSize * 0.5f);
+        scrollActual = Vector3.down * GameManager.MapSize;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
         actual = Vector3.SmoothDamp(current, moveVector + scrollVector, ref test , .07f);
 
         this.transform.Translate(actual, Space.World);
-        this.transform.position = new Vector3(this.transform.position.x,Mathf.Clamp(this.transform.position.y, 10, controller.mapSize * 10),this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x,Mathf.Clamp(this.transform.position.y, 10, GameManager.MapSize * 10),this.transform.position.z);
                 
         current = actual;
 
@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour
     public void CameraMove(InputAction.CallbackContext context)
     {
         current = moveVector;
-        expected = context.ReadValue<Vector2>() * ((this.transform.position.y / controller.mapSize * 10) / 100);
+        expected = context.ReadValue<Vector2>() * ((this.transform.position.y / GameManager.MapSize * 10) / 100);
         moveVector = new Vector3(-expected.x, 0, -expected.y);
     }
 

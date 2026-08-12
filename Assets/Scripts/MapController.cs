@@ -11,7 +11,7 @@ public class MapController : MonoBehaviour
 
     public ParticleSystem portal;
     [Range(3,100)]
-    public int mapSize = 5;
+    public int MapSize = 5;
 
     public GameObject[,] tileSet;
     public bool[,] tileGeneration;
@@ -50,16 +50,16 @@ public class MapController : MonoBehaviour
             CleanupMap();
         }
 
-        tileSet = new GameObject[mapSize, mapSize];
-        tileGeneration = new bool[mapSize, mapSize];
+        tileSet = new GameObject[MapSize, MapSize];
+        tileGeneration = new bool[MapSize, MapSize];
 
         GenerateTileset();
 
         GameObject usedPrefab = pathPrefab;
 
-        for (int i = 0; i < mapSize; i++)
+        for (int i = 0; i < MapSize; i++)
         {
-            for (int j = 0; j < mapSize; j++)
+            for (int j = 0; j < MapSize; j++)
             {
 
                 switch (tileGeneration[j,i])
@@ -123,12 +123,12 @@ public class MapController : MonoBehaviour
 
         wayPoints = new List<Vector2Int>();
 
-        startPoint = new Vector2Int(UnityEngine.Random.Range(0, mapSize), 0);
-        endPoint = new Vector2Int((mapSize - 1) - startPoint.x , (mapSize - 1) - startPoint.y);
+        startPoint = new Vector2Int(UnityEngine.Random.Range(0, MapSize), 0);
+        endPoint = new Vector2Int((MapSize - 1) - startPoint.x , (MapSize - 1) - startPoint.y);
 
-        for (int i = 0; i < Mathf.RoundToInt(mapSize / 5); i++)
+        for (int i = 0; i < Mathf.RoundToInt(MapSize / 5); i++)
         {
-            tempPoint = new Vector2Int(UnityEngine.Random.Range(1, mapSize - 1), UnityEngine.Random.Range(1, mapSize - 1));
+            tempPoint = new Vector2Int(UnityEngine.Random.Range(1, MapSize - 1), UnityEngine.Random.Range(1, MapSize - 1));
         
             if (!wayPoints.Contains(tempPoint))
             {
@@ -187,7 +187,7 @@ public class MapController : MonoBehaviour
                     }
                     tempVector = new Vector2Int(current.Position.x + (i), current.Position.y + (j));
 
-                    if (tempVector.x >= 0 && tempVector.y >= 0 && tempVector.x < mapSize && tempVector.y < mapSize)
+                    if (tempVector.x >= 0 && tempVector.y >= 0 && tempVector.x < MapSize && tempVector.y < MapSize)
                     {
                         if (closedList.FirstOrDefault(x => x.Position == tempVector) == null && openList.FirstOrDefault(x => x.Position == tempVector) == null)
                         {
