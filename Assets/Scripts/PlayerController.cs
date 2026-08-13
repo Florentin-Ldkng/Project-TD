@@ -1,12 +1,10 @@
-using NUnit.Framework;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    private OutlineHelper OutlineHelper;
     public Camera _camera;
     public GameManager _gameManager;
     public MapController _mapController;
@@ -17,22 +15,23 @@ public class PlayerController : MonoBehaviour
     public GameObject prevGameobject;
 
     public List<GameObject> TowerPrefabs;
-    int layerMask;
-    uint lightmaskYellow, lightmaskWhite, lightmaskDefault;
-    uint noLine, yellowLine, whiteLine;
+    //int layerMask;
+    //uint lightmaskYellow, lightmaskWhite, lightmaskDefault;
+    //uint noLine, yellowLine, whiteLine;
 
     private Vector2 lastPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        layerMask = LayerMask.GetMask("FloorCheck");
-        lightmaskWhite = RenderingLayerMask.GetMask("Light Layer 1");
-        lightmaskYellow = RenderingLayerMask.GetMask("Light Layer 2");
-        lightmaskDefault = RenderingLayerMask.GetMask("Default");
-
-        noLine = lightmaskDefault;
-        whiteLine = lightmaskDefault | lightmaskWhite;
-        yellowLine = lightmaskDefault | lightmaskYellow;
+        OutlineHelper = new OutlineHelper();
+        //layerMask = LayerMask.GetMask("FloorCheck");
+        //lightmaskWhite = RenderingLayerMask.GetMask("Light Layer 1");
+        //lightmaskYellow = RenderingLayerMask.GetMask("Light Layer 2");
+        //lightmaskDefault = RenderingLayerMask.GetMask("Default");
+        //
+        //noLine = lightmaskDefault;
+        //whiteLine = lightmaskDefault | lightmaskWhite;
+        //yellowLine = lightmaskDefault | lightmaskYellow;
     }
 
     // Update is called once per frame
@@ -64,10 +63,9 @@ public class PlayerController : MonoBehaviour
             ray = _camera.ScreenPointToRay(ContextValue);
         }
 
-
-
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100, layerMask))
+
+        if (Physics.Raycast(ray, out hit, 100, OutlineHelper.layerMask))
         {
             if (hit.collider.gameObject.CompareTag("Placeable") || hit.collider.gameObject.CompareTag("Tower"))
             {
@@ -75,12 +73,12 @@ public class PlayerController : MonoBehaviour
                 {
                     currGameobject = hit.collider.gameObject;
 
-                    SetIndex(currGameobject, true);
+                    OutlineHelper.SetIndex(currGameobject, true);
 
 
                     if (prevGameobject != null)
                     {
-                        SetIndex(prevGameobject, false);
+                        OutlineHelper.SetIndex(prevGameobject, false);
                     }
 
                     prevGameobject = currGameobject;
@@ -91,7 +89,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (prevGameobject != null)
                 {
-                    SetIndex(prevGameobject, false);
+                    OutlineHelper.SetIndex(prevGameobject, false);
                     currGameobject = null;
                     prevGameobject = null;
                 }
@@ -102,7 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             if (prevGameobject != null)
             {
-                SetIndex(prevGameobject, false);
+                OutlineHelper.SetIndex(prevGameobject, false);
                 currGameobject = null;
                 prevGameobject = null;
             }
@@ -120,11 +118,11 @@ public class PlayerController : MonoBehaviour
 
                 currGameobject.transform.SetParent(tempBuffer.transform, true);
 
-                SetIndex(currGameobject, false);
+                OutlineHelper.SetIndex(currGameobject, false);
 
                 currGameobject.tag = "Tower";
 
-                SetIndex(currGameobject, true);
+                OutlineHelper.SetIndex(currGameobject, true);
 
                 prevGameobject = currGameobject;
 
@@ -133,34 +131,6 @@ public class PlayerController : MonoBehaviour
                 _mapController.towers.Add(tempBuffer);
             }
         }
-    }
-
-    private void SetIndex(GameObject hit, bool Line)
-    {
-        Renderer tempRenderer = null;
-        uint tempIndex = 0;
-
-        switch (hit.tag)
-        {
-            case "Tower":
-                tempRenderer = hit.transform.GetComponent<Renderer>();
-                tempIndex = yellowLine;
-                break;
-            case "Placeable":
-                tempRenderer = hit.GetComponent<Renderer>();
-                tempIndex = whiteLine;
-                break;
-        }
-
-        if (Line)
-        {
-            tempRenderer.renderingLayerMask = tempIndex;
-        }
-        else
-        {
-            tempRenderer.renderingLayerMask = noLine;
-        }
-
     }
 
     public void RightMouseClick(InputAction.CallbackContext context)
