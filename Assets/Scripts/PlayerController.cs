@@ -15,23 +15,12 @@ public class PlayerController : MonoBehaviour
     public GameObject prevGameobject;
 
     public List<GameObject> TowerPrefabs;
-    //int layerMask;
-    //uint lightmaskYellow, lightmaskWhite, lightmaskDefault;
-    //uint noLine, yellowLine, whiteLine;
 
     private Vector2 lastPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         OutlineHelper = new OutlineHelper();
-        //layerMask = LayerMask.GetMask("FloorCheck");
-        //lightmaskWhite = RenderingLayerMask.GetMask("Light Layer 1");
-        //lightmaskYellow = RenderingLayerMask.GetMask("Light Layer 2");
-        //lightmaskDefault = RenderingLayerMask.GetMask("Default");
-        //
-        //noLine = lightmaskDefault;
-        //whiteLine = lightmaskDefault | lightmaskWhite;
-        //yellowLine = lightmaskDefault | lightmaskYellow;
     }
 
     // Update is called once per frame
@@ -128,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
                 _gameManager.Gold -= 10;
 
-                _mapController.towers.Add(tempBuffer);
+                //_mapController.towers.Add(tempBuffer);
             }
         }
     }

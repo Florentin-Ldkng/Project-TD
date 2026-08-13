@@ -1,54 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public MapController mapController;
-    public List<GameObject> enemy;
-    public List<int> enemyValue;
+    public SimpleMap mapController;
+    public List<GameObject> enemyList;
 
     public List<GameObject> activeEnemies;
 
-    public int Budget;
+    public List<Wave> Waves;
+
+    
     public event System.Action OnEmptyList;
 
+    private Wave activeWave;
+    private bool spawningDone = false;
+    
     public void Start()
     {
+        
     }
 
-    public void StartSpawning(int EnemyBudget)
+    public void StartSpawning(int Wave)
     {
-        Budget = EnemyBudget;
-        StartCoroutine(SpawnEnemies());    
+        spawningDone = false;
+
+        
+        activeWave = Waves[Wave];
+        enemyList = activeWave.EnemyOrder;
+
+        StartCoroutine(SpawnEnemies());
     }
     public IEnumerator SpawnEnemies()
     {
-        do
+        foreach (var item in enemyList)
         {
-            yield return new WaitForSeconds(1);
-            var spawn = Instantiate(enemy.First(), mapController.path.First().transform.position + (Vector3.up * 0.5f), Quaternion.identity, this.transform);
+            yield return new WaitForSeconds(Random.Range(activeWave.waitTimeBasic - activeWave.waitTimeRandomBound, activeWave.waitTimeBasic + activeWave.waitTimeRandomBound));
+
+            var spawn = Instantiate(item, mapController.path.First().transform.position + (Vector3.up * 0.5f), Quaternion.identity, this.transform);
+            
+            //Needs Rework i dont know the enemy
             spawn.GetComponent<BaseSkeleton>().Path = mapController.path;
 
             activeEnemies.Add(spawn);
-            Budget -= enemyValue.First();
+            
+        }
 
-        } while (Budget > 0);
-
+        spawningDone = true;
 
         yield return null;
     }
 
     public void RemoveEnemy(GameObject enemy)
     {
-        
-        mapController.BroadcastMessage("RemoveEnemy", enemy);
+
+        //mapController.BroadcastMessage("RemoveEnemy", enemy);
 
         activeEnemies.Remove(enemy);
 
-        if (Budget == 0 && activeEnemies.Count == 0)
+        if (activeEnemies.Count == 0 && spawningDone)
         {
             OnEmptyList?.Invoke();
             activeEnemies.Clear();

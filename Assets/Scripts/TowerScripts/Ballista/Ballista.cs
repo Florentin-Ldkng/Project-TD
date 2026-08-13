@@ -82,14 +82,14 @@ public class Ballista : MonoBehaviour
             ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
         }
 
-        Range = BallistaBaseStats[CurrentLevel].BaseRange;
-        Damage = BallistaBaseStats[CurrentLevel].BaseDamage;
-        ShootingDelay = BallistaBaseStats[CurrentLevel].BaseShootingDelay;
-        Multitarget = BallistaBaseStats[CurrentLevel].Multitarget;
-        UsesRange = BallistaBaseStats[CurrentLevel].UsesRange;
-        MaxTargets = BallistaBaseStats[CurrentLevel].MaxTargets;
-        DamageAllocation = BallistaBaseStats[CurrentLevel].DamageAllocation;
-        XPThreshhold = BallistaBaseStats[CurrentLevel].XPThreshhold;
+        Range               = BallistaBaseStats[CurrentLevel].BaseRange;
+        Damage              = BallistaBaseStats[CurrentLevel].BaseDamage;
+        ShootingDelay       = BallistaBaseStats[CurrentLevel].BaseShootingDelay;
+        Multitarget         = BallistaBaseStats[CurrentLevel].Multitarget;
+        UsesRange           = BallistaBaseStats[CurrentLevel].UsesRange;
+        MaxTargets          = BallistaBaseStats[CurrentLevel].MaxTargets;
+        DamageAllocation    = BallistaBaseStats[CurrentLevel].DamageAllocation;
+        XPThreshhold        = BallistaBaseStats[CurrentLevel].XPThreshhold;
 
         AttackPoints.Clear();
         AttackPoints.AddRange(ballistaAttackPoints[CurrentLevel].Attackpoints);
