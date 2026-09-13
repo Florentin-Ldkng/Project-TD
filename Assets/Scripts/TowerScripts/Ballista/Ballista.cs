@@ -8,20 +8,14 @@ using UnityEngine.Pool;
 public class Ballista : MonoBehaviour
 {
     public BallistaAttackPoints[] ballistaAttackPoints = new BallistaAttackPoints[5];
-
     public TowerGeneric tG;
     public List<GameObject> Targets = new List<GameObject>();
-    public List<GameObject> AttackPoints = new List<GameObject>();
-    
+    public List<GameObject> AttackPoints = new List<GameObject>();    
     public GameObject ProjectileBig;
     public GameObject ProjectileSmall;
-
     public GameObject ProjectilesEmpty;
-
     bool isShooting = false;
-
     private bool selectorIsRunning = false;
-
     private int LAttach = 1, RAttach = 1;
 
 

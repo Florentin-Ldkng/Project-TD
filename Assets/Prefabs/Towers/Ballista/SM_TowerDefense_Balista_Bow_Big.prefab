@@ -104,8 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195342e87d85f174fac569cb4f3449e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ballista_Projectile
-  Damage: 0
-  Speed: 0
   EffectsOnProjectiles: 5
 --- !u!136 &7922025577218957516
 CapsuleCollider:
@@ -126,7 +124,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.8866343
-  m_Height: 1.3887892
-  m_Direction: 1
-  m_Center: {x: 0.000030517578, y: 0.0000035464764, z: 0.65532553}
+  m_Radius: 1.16
+  m_Height: 6.03
+  m_Direction: 2
+  m_Center: {x: 0.000030398369, y: 0.0000035762787, z: 0.65532565}
