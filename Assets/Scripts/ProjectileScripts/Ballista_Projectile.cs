@@ -14,7 +14,7 @@ public class Ballista_Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!alreadyTriggered)
+        if(!alreadyTriggered && other.gameObject == projectile.target)
         other.gameObject.SendMessage("RegisterProjectile",projectile);
         Destroy(this.gameObject);
         alreadyTriggered = true;

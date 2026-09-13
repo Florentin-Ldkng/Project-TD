@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int Wave = 1;
+    private int Wave = 0;
     public int MaxWave;
     public int PlayerHP;
     public int Gold;
@@ -16,15 +16,15 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //_enemyController.OnEmptyList += WaveCompleted;
+        _enemyController.OnEmptyList += WaveCompleted;
 
-        MaxWave = CurrentLevel.Waves.Count;
+        MaxWave = CurrentLevel.Waves.Count - 1;
         PlayerHP = CurrentLevel.PlayerHP;
         Gold = CurrentLevel.Gold;
 
         _enemyController.Waves = CurrentLevel.Waves;
 
-        _enemyController.StartSpawning(0);
+        _enemyController.StartSpawning(Wave);
     }
 
     // Update is called once per frame
@@ -35,10 +35,21 @@ public class GameManager : MonoBehaviour
 
     private void WaveCompleted()
     {
+        if (Wave < MaxWave)
+        {
+            Wave++;
+            _enemyController.StartSpawning(Wave);
+        }
+        else
+        {
+            MapComplete();
+        }
     }
 
     private void MapComplete()
     {
+        Debug.Log("MapComplete");
     }
 
 }
+

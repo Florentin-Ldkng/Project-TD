@@ -3,39 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Ballista : MonoBehaviour
 {
-    public Tower[] BallistaBaseStats = new Tower[5];
-    public GameObject[] BallistaLevels = new GameObject[5];
     public BallistaAttackPoints[] ballistaAttackPoints = new BallistaAttackPoints[5];
 
+    public TowerGeneric tG;
     public List<GameObject> Targets = new List<GameObject>();
     public List<GameObject> AttackPoints = new List<GameObject>();
-    public GameObject DetectionRange;
-    public TowerDetection TowerDetection;
+    
     public GameObject ProjectileBig;
     public GameObject ProjectileSmall;
 
-    public ParticleSystem Levelup;
-
     public GameObject ProjectilesEmpty;
-    public int CurrentLevel = 0;
-    public int XP = 0;
-
-
-    public int XPThreshhold;
 
     bool isShooting = false;
 
-
-    private int Range;
-    private int Damage;
-    private float ShootingDelay;
-    private bool Multitarget;
-    private bool UsesRange;
-    private int MaxTargets;
-    private int DamageAllocation;
     private bool selectorIsRunning = false;
 
     private int LAttach = 1, RAttach = 1;
@@ -43,72 +27,58 @@ public class Ballista : MonoBehaviour
 
     void Start()
     {
-        LoadStats();
-        EnableTower();
-        UpdateRange();
+        BallistaLevelUp();
+        tG.EnableTower();
+        tG.UpdateRange();
     }
 
     private void FixedUpdate()
     {
-        foreach (var SideTurrets in AttackPoints.FindAll(x => x.gameObject.CompareTag("Attachment")))
+
+        foreach (var SideTurrets in AttackPoints)
         {
-            SideTurrets.transform.Rotate(new Vector3(0, LAttach, 0));
+            if (SideTurrets.CompareTag("Attachment"))
+            {
+                SideTurrets.transform.Rotate(new Vector3(0, LAttach, 0));
+            }
         }
 
-
-        if (TowerDetection.enemyList.Count > 0)
+        if (tG.towerDetection.enemyList.Count > 0)
         {
-            AttackPoints[0].transform.LookAt(TowerDetection.enemyList.First().enemy.transform.position + Vector3.up * 1.5f);
+            AttackPoints[0].transform.LookAt(tG.towerDetection.enemyList.First().enemy.transform.position + Vector3.up * 1.5f);
         }
-
 
     }
 
     private void OnEnable()
     {
-        TowerDetection.OnDetection += EnemyHandler;
+        tG.towerDetection.OnDetection += EnemyHandler;
+        tG.OnLevelUp += BallistaLevelUp;
     }
 
     private void OnDisable()
     {
-        TowerDetection.OnDetection -= EnemyHandler;
-        ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
+        tG.towerDetection.OnDetection -= EnemyHandler;
+        tG.OnLevelUp -= BallistaLevelUp;
+        ballistaAttackPoints[tG.CurrentLevel].OnRotationLimitHit -= TowerReset;
     }
-    private void LoadStats()
+    private void BallistaLevelUp()
     {
 
-        if (Range != 0)
+        if (tG.Range != 0)
         {
-            ballistaAttackPoints[CurrentLevel].OnRotationLimitHit -= TowerReset;
+            ballistaAttackPoints[tG.CurrentLevel].OnRotationLimitHit -= TowerReset;
         }
 
-        Range               = BallistaBaseStats[CurrentLevel].BaseRange;
-        Damage              = BallistaBaseStats[CurrentLevel].BaseDamage;
-        ShootingDelay       = BallistaBaseStats[CurrentLevel].BaseShootingDelay;
-        Multitarget         = BallistaBaseStats[CurrentLevel].Multitarget;
-        UsesRange           = BallistaBaseStats[CurrentLevel].UsesRange;
-        MaxTargets          = BallistaBaseStats[CurrentLevel].MaxTargets;
-        DamageAllocation    = BallistaBaseStats[CurrentLevel].DamageAllocation;
-        XPThreshhold        = BallistaBaseStats[CurrentLevel].XPThreshhold;
+        tG.LoadStats();
 
         AttackPoints.Clear();
-        AttackPoints.AddRange(ballistaAttackPoints[CurrentLevel].Attackpoints);
+        AttackPoints.AddRange(ballistaAttackPoints[tG.CurrentLevel].Attackpoints);
 
         Targets.Clear();
-        Targets.Capacity = MaxTargets;
+        Targets.Capacity = tG.MaxTargets;
 
-        ballistaAttackPoints[CurrentLevel].OnRotationLimitHit += TowerReset;
-    }
-
-    private void EnableTower()
-    {
-        BallistaLevels[Mathf.Clamp(CurrentLevel - 1, 0, 4)].SetActive(false);
-        BallistaLevels[CurrentLevel].SetActive(true);
-    }
-
-    private void UpdateRange()
-    {
-        DetectionRange.transform.localScale = new Vector3(Range, Range, Range);
+        ballistaAttackPoints[tG.CurrentLevel].OnRotationLimitHit += TowerReset;
     }
 
     private void EnemyHandler()
@@ -124,18 +94,11 @@ public class Ballista : MonoBehaviour
             StartCoroutine(TargetSelector());
         }
     }
-
-    private void LevelUp()
-    {
-        Levelup.Play();
-        LoadStats();
-        EnableTower();
-        UpdateRange();
-    }
+       
 
     private void TowerReset()
     {
-        SetCorrectRotation(ballistaAttackPoints[CurrentLevel].errorPoint.name);
+        SetCorrectRotation(ballistaAttackPoints[tG.CurrentLevel].errorPoint.name);
     }
 
     private void SetCorrectRotation(string name)
@@ -154,28 +117,18 @@ public class Ballista : MonoBehaviour
         }
     }
 
-    public void EarnXP(int earnedXP)
-    {
-        XP += earnedXP;
-        if (XP >= XPThreshhold && CurrentLevel < 4)
-        {
-            XP = XPThreshhold - XP;
-            CurrentLevel++; 
-            LevelUp();
-        }
-    }
 
     IEnumerator Shooting()
     {
         isShooting = true;
-        yield return new WaitForSeconds(ShootingDelay);
+        yield return new WaitForSeconds(tG.ShootingDelay);
         do
         {
-            var a = Instantiate(ProjectileBig, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
-            a.GetComponent<Ballista_Projectile>().projectile.setValues(Damage, .4f,StatusEffects.None,this.gameObject);
+            var a = Instantiate(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
+            a.GetComponent<Ballista_Projectile>().projectile.setValues(tG.Damage, .4f,StatusEffects.None,this.gameObject, tG.towerDetection.enemyList.First().enemy.gameObject);
 
-            yield return new WaitForSeconds(ShootingDelay);
-        } while (TowerDetection.enemyList.Count > 0);
+            yield return new WaitForSeconds(tG.ShootingDelay);
+        } while (tG.towerDetection.enemyList.Count > 0);
 
         isShooting = false;
         yield return null;

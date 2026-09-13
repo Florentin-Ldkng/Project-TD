@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3589b65982cee9c409161015fe47b67a, type: 3}
   m_Name: TestWave
   m_EditorClassIdentifier: Assembly-CSharp::Wave
-  waitTimeBasic: 1
+  waitTimeBasic: 2
   waitTimeRandomBound: 0.25
   EnemyOrder:
+  - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
+  - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
+  - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
   - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
   - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}
   - {fileID: 8292499807560004890, guid: ac178c540f78c74418d261094716b0ed, type: 3}

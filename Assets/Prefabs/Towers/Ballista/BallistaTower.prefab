@@ -913,6 +913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155500027855624222}
   - component: {fileID: 3808493037094351205}
+  - component: {fileID: 3510353586019366129}
   m_Layer: 0
   m_Name: BallistaTower
   m_TagString: Untagged
@@ -951,35 +952,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b5e0df38d6bbb4cb3322133a2e9633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ballista
-  BallistaBaseStats:
-  - {fileID: 11400000, guid: 7e33996d2e7316d40955fe217c0fb7e2, type: 2}
-  - {fileID: 11400000, guid: 84459890e3828ed4790edd9c46fb8feb, type: 2}
-  - {fileID: 11400000, guid: 94741a8536493984b9e11713badba169, type: 2}
-  - {fileID: 11400000, guid: ae8ed14736fb3604ba1ecc7541e909d2, type: 2}
-  - {fileID: 11400000, guid: 962d9d9303bc0d64b9e26bfaafb832e8, type: 2}
-  BallistaLevels:
-  - {fileID: 9156629779537710406}
-  - {fileID: 2971344341966803595}
-  - {fileID: 292880235129349223}
-  - {fileID: 3456587121082534570}
-  - {fileID: 8798078181183566452}
   ballistaAttackPoints:
   - {fileID: 5946839851283024945}
   - {fileID: 7733779212742817991}
   - {fileID: 4735365623771545944}
   - {fileID: 3127864193525808762}
   - {fileID: 5019559526727422490}
+  tG: {fileID: 3510353586019366129}
   Targets: []
   AttackPoints: []
-  DetectionRange: {fileID: 6553970347878702633}
-  TowerDetection: {fileID: 1143802537948489387}
   ProjectileBig: {fileID: 8204834379312223003, guid: 89180b9f706d655428dd4d17e7c8a4ea, type: 3}
   ProjectileSmall: {fileID: 7165027595862881997, guid: 5fbe106673798494691b553ca0408089, type: 3}
-  Levelup: {fileID: 2801330721420447262}
   ProjectilesEmpty: {fileID: 7180193239894630218}
+--- !u!114 &3510353586019366129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263133603815472853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1871c76a168db140aa9e2415e181648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerGeneric
+  TowerBaseStats:
+  - {fileID: 11400000, guid: 7e33996d2e7316d40955fe217c0fb7e2, type: 2}
+  - {fileID: 11400000, guid: 84459890e3828ed4790edd9c46fb8feb, type: 2}
+  - {fileID: 11400000, guid: 94741a8536493984b9e11713badba169, type: 2}
+  - {fileID: 11400000, guid: ae8ed14736fb3604ba1ecc7541e909d2, type: 2}
+  - {fileID: 11400000, guid: 962d9d9303bc0d64b9e26bfaafb832e8, type: 2}
+  TowerLevels:
+  - {fileID: 9156629779537710406}
+  - {fileID: 2971344341966803595}
+  - {fileID: 292880235129349223}
+  - {fileID: 3456587121082534570}
+  - {fileID: 8798078181183566452}
   CurrentLevel: 0
   XP: 0
   XPThreshhold: 0
+  Levelup: {fileID: 2801330721420447262}
+  Range: 0
+  Damage: 0
+  ShootingDelay: 0
+  Multitarget: 0
+  UsesRange: 0
+  MaxTargets: 0
+  DamageAllocation: 0
+  DetectionRange: {fileID: 6553970347878702633}
+  towerDetection: {fileID: 1143802537948489387}
 --- !u!1 &6553970347878702633
 GameObject:
   m_ObjectHideFlags: 0

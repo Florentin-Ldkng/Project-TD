@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public SimpleMap mapController;
     public List<GameObject> enemyList;
 
+    public GameObject TowerEmpty;
     public List<GameObject> activeEnemies;
 
     public List<Wave> Waves;
@@ -26,7 +27,6 @@ public class EnemyController : MonoBehaviour
     public void StartSpawning(int Wave)
     {
         spawningDone = false;
-
         
         activeWave = Waves[Wave];
         enemyList = activeWave.EnemyOrder;
@@ -56,7 +56,7 @@ public class EnemyController : MonoBehaviour
     public void RemoveEnemy(GameObject enemy)
     {
 
-        //mapController.BroadcastMessage("RemoveEnemy", enemy);
+        TowerEmpty.BroadcastMessage("RemoveEnemy", enemy);
 
         activeEnemies.Remove(enemy);
 
