@@ -6,7 +6,11 @@ public class Ballista_Projectile : MonoBehaviour
     public StatusEffects EffectsOnProjectiles;
     
     bool alreadyTriggered = false;
-    
+
+    private void OnEnable()
+    {
+        alreadyTriggered = false;
+    }
     void FixedUpdate()
     {
         this.transform.Translate(Vector3.forward * projectile.speed);
@@ -15,8 +19,8 @@ public class Ballista_Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(!alreadyTriggered && other.gameObject == projectile.target)
-        other.gameObject.SendMessage("RegisterProjectile",projectile);
-        Destroy(this.gameObject);
-        alreadyTriggered = true;
+            other.gameObject.SendMessage("RegisterProjectile",projectile);
+            ProjectilePool.ReturnObjToPool(this.gameObject);
+            alreadyTriggered = true;
     }
 }

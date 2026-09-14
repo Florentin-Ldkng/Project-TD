@@ -13,7 +13,7 @@ public class Ballista : MonoBehaviour
     public List<GameObject> AttackPoints = new List<GameObject>();    
     public GameObject ProjectileBig;
     public GameObject ProjectileSmall;
-    public GameObject ProjectilesEmpty;
+    
     bool isShooting = false;
     private bool selectorIsRunning = false;
     private int LAttach = 1, RAttach = 1;
@@ -24,6 +24,7 @@ public class Ballista : MonoBehaviour
         BallistaLevelUp();
         tG.EnableTower();
         tG.UpdateRange();
+
     }
 
     private void FixedUpdate()
@@ -118,7 +119,8 @@ public class Ballista : MonoBehaviour
         yield return new WaitForSeconds(tG.ShootingDelay);
         do
         {
-            var a = Instantiate(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
+            //var a = Instantiate(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
+            var a = ProjectilePool.SpawnObject(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation);
             a.GetComponent<Ballista_Projectile>().projectile.setValues(tG.Damage, .4f,StatusEffects.None,this.gameObject, tG.towerDetection.enemyList.First().enemy.gameObject);
 
             yield return new WaitForSeconds(tG.ShootingDelay);
