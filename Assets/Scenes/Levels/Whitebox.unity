@@ -1923,21 +1923,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3808493037094351205, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
-      propertyPath: pool
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3808493037094351205, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
-      propertyPath: CurrentLevel
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
       propertyPath: m_Name
       value: BallistaTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7180193239894630218, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}

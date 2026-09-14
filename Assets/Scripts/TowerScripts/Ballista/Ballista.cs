@@ -13,23 +13,21 @@ public class Ballista : MonoBehaviour
     public List<GameObject> AttackPoints = new List<GameObject>();    
     public GameObject ProjectileBig;
     public GameObject ProjectileSmall;
-    
     bool isShooting = false;
     private bool selectorIsRunning = false;
     private int LAttach = 1, RAttach = 1;
 
-
+    Vector3 targetOld = new Vector3();
+    Vector3 targetNew;
     void Start()
     {
         BallistaLevelUp();
         tG.EnableTower();
         tG.UpdateRange();
-
     }
 
     private void FixedUpdate()
     {
-
         foreach (var SideTurrets in AttackPoints)
         {
             if (SideTurrets.CompareTag("Attachment"))
@@ -40,9 +38,14 @@ public class Ballista : MonoBehaviour
 
         if (tG.towerDetection.enemyList.Count > 0)
         {
-            AttackPoints[0].transform.LookAt(tG.towerDetection.enemyList.First().enemy.transform.position + Vector3.up * 1.5f);
-        }
+            targetNew = tG.towerDetection.enemyList.First().enemy.transform.position;
 
+            Vector3 direction = (targetNew - targetOld).normalized * 0.4f;
+
+            AttackPoints[0].transform.LookAt(targetNew + direction + (Vector3.up * 1.5f));
+
+            targetOld = targetNew;
+        }
     }
 
     private void OnEnable()
@@ -88,8 +91,7 @@ public class Ballista : MonoBehaviour
             selectorIsRunning = true;
             StartCoroutine(TargetSelector());
         }
-    }
-       
+    }      
 
     private void TowerReset()
     {
@@ -118,12 +120,22 @@ public class Ballista : MonoBehaviour
         isShooting = true;
         yield return new WaitForSeconds(tG.ShootingDelay);
         do
-        {
-            //var a = Instantiate(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation, ProjectilesEmpty.transform);
-            var a = ProjectilePool.SpawnObject(ProjectileBig, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.position, ballistaAttackPoints[tG.CurrentLevel].Shootpoints[0].transform.rotation);
-            a.GetComponent<Ballista_Projectile>().projectile.setValues(tG.Damage, .4f,StatusEffects.None,this.gameObject, tG.towerDetection.enemyList.First().enemy.gameObject);
+        {    
+            foreach ( var item in ballistaAttackPoints[tG.CurrentLevel].Shootpoints)
+            {
+                GameObject Prefab = ProjectileBig;
+
+                if (item.name != "ShootPoint")
+                {
+                    Prefab = ProjectileSmall;
+                }
+
+                var a = ProjectilePool.SpawnObject(Prefab, item.transform.position, item.transform.rotation);
+                a.GetComponent<Ballista_Projectile>().projectile.setValues(tG.Damage, .4f, StatusEffects.None, this.gameObject, tG.towerDetection.enemyList.First().enemy.gameObject);
+            }
 
             yield return new WaitForSeconds(tG.ShootingDelay);
+
         } while (tG.towerDetection.enemyList.Count > 0);
 
         isShooting = false;
