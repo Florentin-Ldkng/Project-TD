@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c3db1aaee66804cb5c6c511d6dd126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
+  gEnemy: {fileID: 8694144920776652904}
 --- !u!114 &8694144920776652904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +148,7 @@ MonoBehaviour:
   EnemyStats: {fileID: 11400000, guid: 4d1bb66e55243f340871eff3f7eb172b, type: 2}
   animator: {fileID: 9085972644180743167}
   index: 0
+  walkClip: {fileID: 4641707765673729118, guid: f7eb2d70298750a4f9c5f7595b34e526, type: 3}
 --- !u!54 &2617771140839984933
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -5,5 +5,10 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class BaseSkeleton : MonoBehaviour
 {
-    
+    public GenericEnemy gEnemy;
+
+    public void OnSpawnEnd()
+    {
+
+    }
 }

@@ -8,12 +8,14 @@ public class GenericEnemy : MonoBehaviour
     public Animator animator;
     public int index = 0;
     private Projectile lastHit;
+    public AnimationClip walkClip;
 
     private int Hp;
     private int Armor;
     private float Speed;
     private int XPGiven;
     private bool stealth;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +30,13 @@ public class GenericEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         this.transform.LookAt(Path[index].transform.position + (Vector3.up * .5f));
-        this.transform.Translate((Vector3.forward * Speed) * Time.deltaTime);
+
+        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName(walkClip.name));
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(walkClip.name))
+        {
+            this.transform.Translate((Vector3.forward * Speed) * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
