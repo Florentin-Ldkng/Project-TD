@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
             var spawn = Instantiate(item, mapController.path.First().transform.position + (Vector3.up * 0.5f), Quaternion.identity, this.transform);
             
             //Needs Rework i dont know the enemy
-            spawn.GetComponent<BaseSkeleton>().Path = mapController.path;
+            spawn.GetComponent<GenericEnemy>().Path = mapController.path;
 
             activeEnemies.Add(spawn);
             

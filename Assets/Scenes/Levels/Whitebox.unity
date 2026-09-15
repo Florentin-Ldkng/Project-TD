@@ -1923,6 +1923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3510353586019366129, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
+      propertyPath: CurrentLevel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
       propertyPath: m_Name
       value: BallistaTower

@@ -84,6 +84,9 @@ PrefabInstance:
       addedObject: {fileID: 8702186701438381953}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7eb2d70298750a4f9c5f7595b34e526, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8694144920776652904}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7eb2d70298750a4f9c5f7595b34e526, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2617771140839984933}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f7eb2d70298750a4f9c5f7595b34e526, type: 3}
       insertIndex: -1
@@ -128,6 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c3db1aaee66804cb5c6c511d6dd126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseSkeleton
+--- !u!114 &8694144920776652904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292499807560004890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb09ab8fe201154ba9b1eeda866477b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenericEnemy
   Path: []
   EnemyStats: {fileID: 11400000, guid: 4d1bb66e55243f340871eff3f7eb172b, type: 2}
   animator: {fileID: 9085972644180743167}
