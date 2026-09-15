@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,11 +11,15 @@ public class GenericEnemy : MonoBehaviour
     private Projectile lastHit;
     public AnimationClip walkClip;
 
+    public CapsuleCollider collider;
+
     private int Hp;
     private int Armor;
     private float Speed;
     private int XPGiven;
     private bool stealth;
+
+    private bool dead = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,8 +35,6 @@ public class GenericEnemy : MonoBehaviour
     private void FixedUpdate()
     {
         this.transform.LookAt(Path[index].transform.position + (Vector3.up * .5f));
-
-        Debug.Log(animator.GetCurrentAnimatorStateInfo(0).IsName(walkClip.name));
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(walkClip.name))
         {
@@ -56,17 +59,33 @@ public class GenericEnemy : MonoBehaviour
 
     public void RegisterProjectile(Projectile projectile)
     {
-        lastHit = projectile;
-        Hp -= projectile.damage;
+        if (!dead)
+        {
+            lastHit = projectile;
+            Hp -= projectile.damage;
 
-        if (Hp <= 0)
-            Destroy(this.gameObject);
+            Debug.Log(Hp);
+
+            if (Hp <= 0)
+                Death();
+        }
+        
+            
     }
 
-    private void OnDisable()
+
+    private void Death()
     {
+        dead = true;
+
+        collider.enabled = false;
+        animator.SetBool("Dead", true);
+
         GameObject.Find("Enemies").BroadcastMessage("RemoveEnemy", this.gameObject);
+
         if (lastHit != null)
             lastHit.originTower.SendMessage("EarnXP", XPGiven);
+
+        Destroy(this.gameObject, 1);
     }
 }

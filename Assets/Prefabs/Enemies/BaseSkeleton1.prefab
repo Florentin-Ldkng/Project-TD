@@ -149,6 +149,7 @@ MonoBehaviour:
   animator: {fileID: 9085972644180743167}
   index: 0
   walkClip: {fileID: 4641707765673729118, guid: f7eb2d70298750a4f9c5f7595b34e526, type: 3}
+  collider: {fileID: 5319557391547819811}
 --- !u!54 &2617771140839984933
 Rigidbody:
   m_ObjectHideFlags: 0
