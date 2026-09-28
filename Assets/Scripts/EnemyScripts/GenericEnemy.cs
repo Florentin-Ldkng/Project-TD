@@ -30,16 +30,20 @@ public class GenericEnemy : MonoBehaviour
         Speed = EnemyStats.Speed;
         XPGiven = EnemyStats.XPGiven;
         stealth = EnemyStats.stealth;
+
+        ChangeSpeed();
     }
 
     private void FixedUpdate()
     {
-        this.transform.LookAt(Path[index].transform.position + (Vector3.up * .5f));
+        this.transform.LookAt(Path[index].transform.position + (Vector3.up * .5f));        
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(walkClip.name))
         {
             this.transform.Translate((Vector3.forward * Speed) * Time.deltaTime);
         }
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,8 +68,6 @@ public class GenericEnemy : MonoBehaviour
             lastHit = projectile;
             Hp -= projectile.damage;
 
-            Debug.Log(Hp);
-
             if (Hp <= 0)
                 Death();
         }
@@ -87,5 +89,10 @@ public class GenericEnemy : MonoBehaviour
             lastHit.originTower.SendMessage("EarnXP", XPGiven);
 
         Destroy(this.gameObject, 1);
+    }
+
+    private void ChangeSpeed()
+    {
+        animator.SetFloat("MovementSpeed", Speed);
     }
 }
