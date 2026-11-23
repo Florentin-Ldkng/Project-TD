@@ -1048,7 +1048,7 @@ MonoBehaviour:
   - {fileID: 292880235129349223}
   - {fileID: 3456587121082534570}
   - {fileID: 8798078181183566452}
-  CurrentLevel: 4
+  CurrentLevel: 0
   XP: 0
   XPThreshhold: 0
   Levelup: {fileID: 2801330721420447262}

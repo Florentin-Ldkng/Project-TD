@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public GameObject currGameobject;
     public GameObject prevGameobject;
 
+    public GameObject towerEmpty;
+
     public List<GameObject> TowerPrefabs;
 
     private Vector2 lastPosition;
@@ -103,7 +105,7 @@ public class PlayerController : MonoBehaviour
             {
                 var tempBuffer = Instantiate(TowerPrefabs[0], currGameobject.transform.position, Quaternion.identity);
 
-                tempBuffer.transform.SetParent(currGameobject.transform.parent, true);
+                tempBuffer.transform.SetParent(towerEmpty.transform, true);
 
                 currGameobject.transform.SetParent(tempBuffer.transform, true);
 

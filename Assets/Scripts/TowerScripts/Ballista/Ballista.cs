@@ -38,13 +38,23 @@ public class Ballista : MonoBehaviour
 
         if (tG.towerDetection.enemyList.Count > 0)
         {
-            targetNew = tG.towerDetection.enemyList.First().enemy.transform.position;
 
-            Vector3 direction = (targetNew - targetOld).normalized * 0.4f;
+            if (tG.towerDetection.enemyList.First().enemy.transform.IsDestroyed())
+            {
+                Debug.Log("Destroyed");
+            }
 
-            AttackPoints[0].transform.LookAt(targetNew + direction + (Vector3.up * 1.5f));
+            if (!tG.towerDetection.enemyList.First().enemy.transform.IsDestroyed())
+            {
+                targetNew = tG.towerDetection.enemyList.First().enemy.transform.position;
 
-            targetOld = targetNew;
+                Vector3 direction = (targetNew - targetOld).normalized * 0.4f;
+
+                AttackPoints[0].transform.LookAt(targetNew + direction + (Vector3.up * 1.5f));
+
+                targetOld = targetNew;
+
+            }                  
         }
     }
 

@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   MaxWave: 0
   PlayerHP: 100
-  Gold: 10
+  Gold: 100
   _playerController: {fileID: 295031815}
   _enemyController: {fileID: 2026032896}
   MapSize: 5
@@ -504,6 +504,7 @@ MonoBehaviour:
   material: {fileID: 0}
   currGameobject: {fileID: 0}
   prevGameobject: {fileID: 0}
+  towerEmpty: {fileID: 963580975}
   TowerPrefabs:
   - {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
 --- !u!1001 &297329239
@@ -1930,6 +1931,10 @@ PrefabInstance:
     - target: {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
       propertyPath: m_Name
       value: BallistaTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263133603815472853, guid: feab5dfc44da79d409b130cb5ee08fcb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

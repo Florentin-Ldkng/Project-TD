@@ -55,7 +55,6 @@ public class EnemyController : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
-
         TowerEmpty.BroadcastMessage("RemoveEnemy", enemy);
 
         activeEnemies.Remove(enemy);

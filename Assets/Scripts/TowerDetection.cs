@@ -37,6 +37,7 @@ public class TowerDetection : MonoBehaviour
     public void RemoveEnemy(GameObject enemy)
     {
         var temp = enemyList.Find(x => x.enemy == enemy.gameObject);
+        Debug.Log(temp);
         enemyList.Remove(temp);
     }
 }
